@@ -1,0 +1,48 @@
+version: '3'
+services:
+
+  # The Application
+   # The Database
+  database:
+    image: mysql:5.6
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=zinza
+      - MYSQL_USER=zinza
+      - MYSQL_PASSWORD=zinza
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+        - 33062:3306
+    
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    working_dir: /var/www
+    volumes:
+      - .:/var/www/
+    links:
+      - database
+  
+      # The Web Server
+
+  cache:
+    image: redis
+    restart: always
+
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www
+    ports:
+      - 8000:80
+    depends_on:
+      - app
+    volumes:
+      - ./:/var/www/
+
+volumes:
+  dbdata:
+    
