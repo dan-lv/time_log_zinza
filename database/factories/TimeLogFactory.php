@@ -27,7 +27,7 @@ $factory->define(TimeLog::class, function (Faker $faker) {
 		}
 	}
 
-	for ($day=1; $day < $dayOfMonth +1; $day++) {
+	for ($day = 1; $day < $dayOfMonth + 1; $day++) {
 		$result[] = [
 			'check_in' => $faker->time($format = 'H:i:s', $min = '07:00:00', $max = '09:00:00'),
 			'check_out' => $faker->time($format = 'H:i:s', $min = '17:30:00', $max = '22:00:00'),

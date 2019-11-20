@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
         User::insert($user);
 
         $userAdmin = User::first();
-        for ($i=0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $userAdmin->timeLogs()->createMany(factory(TimeLog::class)->make()->toArray());
         }
 
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
         factory(User::class, 3)->create()->each(function ($user) {
             $user->profiles()->save(factory(Profile::class)->make());
 
-            for ($i=0; $i < 3; $i++) {
+            for ($i = 0; $i < 3; $i++) {
                 $user->timeLogs()->createMany(factory(TimeLog::class)->make()->toArray());
             }
         });
