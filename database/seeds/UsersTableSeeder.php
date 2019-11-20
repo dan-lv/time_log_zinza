@@ -23,15 +23,22 @@ class UsersTableSeeder extends Seeder
             'remember_token' => Str::random(10),
             'role' => 1,
         ];
+
         User::insert($user);
-        
+
         $userAdmin = User::first();
-        $userAdmin->time_logs()->saveMany(factory(TimeLog::class, 4)->make());
+        for ($i=0; $i < 3; $i++) {
+            $userAdmin->timeLogs()->createMany(factory(TimeLog::class)->make()->toArray());
+        }
+
         $userAdmin->profiles()->save(factory(Profile::class)->make());
         
         factory(User::class, 3)->create()->each(function ($user) {
             $user->profiles()->save(factory(Profile::class)->make());
-            $user->time_logs()->saveMany(factory(TimeLog::class, 4)->make());
+
+            for ($i=0; $i < 3; $i++) {
+                $user->timeLogs()->createMany(factory(TimeLog::class)->make()->toArray());
+            }
         });
     }
 }

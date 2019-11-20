@@ -39,13 +39,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function time_logs()
+    public function timeLogs()
     {
         return $this->hasMany(TimeLog::class, 'user_id', 'id');
     }
 
     public function profiles()
     {
-        return $this->hasMany(Profile::class, 'user_id', 'id');
+        return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 }
