@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\TimeLog;
+use App\Models\Profile;
 
 class User extends Authenticatable
 {
@@ -36,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function timeLogs()
+    {
+        return $this->hasMany(TimeLog::class, 'user_id', 'id');
+    }
+
+    public function profiles()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
 }
