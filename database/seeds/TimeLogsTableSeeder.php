@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\TimeLog;
+use App\Models\User;
 
 class TimeLogsTableSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class TimeLogsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(TimeLog::class, 3)->create();
+    	factory(TimeLog::class, 3)->create();  
     }
 }
