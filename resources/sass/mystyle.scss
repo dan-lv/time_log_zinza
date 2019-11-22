@@ -25,6 +25,7 @@ header {
 	padding: 15px 0;
 	position: relative;
 	z-index: 1000;
+	background-color: rgba(0, 0, 0, 0.6);
 }	
 .logo {
 	display: block;
@@ -102,9 +103,6 @@ header #home-nav{
 	background-image: url('/images/banner10.jpg');
 	background-size: cover;
 	position: relative;
-}
-.overlay-dark {
-	background-color: rgba(0, 0, 0, 0.6);
 }
 .text {
 	text-align: center;

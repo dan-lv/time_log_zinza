@@ -8,26 +8,16 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/mystyle.css') }}"> 
+        <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}"> 
     </head>
     <body>
-        <div class="overlay-dark">
-            @include('user.header')
-            <div class="image">
-                <h2 class="text">Find Creativity In</h2>
-                <h3 class="text">Gray World</h3>
-                <div class="container btn-position">
-                    <div class="wrap">
-                        <a href="" class="item1"> Check-in </a>
-                        <a href="" class="item2"> Absent </a>
-                        <a href="" class="item3"> Check-out </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div>
+            @include('header')
+            @yield('content')
+        </div> 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
+        <script>
         $(document).ready(function() {
             $("#notification").click(function(){
                 $(".menu-container").toggleClass("open");

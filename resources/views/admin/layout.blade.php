@@ -8,17 +8,16 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/mystyle.css') }}"> 
+        <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}"> 
     </head>
     <body>
         <div>
-            @include('user.header')
-            <div class="overlay-dark"></div>
-            <img class="banner" src="/images/banner10.jpg">
-        </div>
+            @include('header')
+            @yield('content')
+        </div> 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
+        <script>
         $(document).ready(function() {
             $("#notification").click(function(){
                 $(".menu-container").toggleClass("open");

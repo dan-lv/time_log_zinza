@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('user.layout');
+    return view('user.begin');
 });
