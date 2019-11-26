@@ -6,6 +6,7 @@
             </a>
             <nav id="home-nav">
                 <ul class="main-menu">
+                    @if (Auth::check())
                     <li><a href="#">List Absent</a></li>
                     <li><a href="#">Time-log</a></li>
                     <li><a href="#">Profile</a></li>
@@ -26,7 +27,11 @@
                             </div>
                         </div>
                     </li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Chao [ {{ Auth::user()->name }} ]</a></li>
+                    <li><a href="{{ route('login') }}">Logout</a></li>
+                    @else
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    @endif
                 </ul>
             </nav>  
         </div>
