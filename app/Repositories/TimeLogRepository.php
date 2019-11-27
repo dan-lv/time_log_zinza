@@ -9,43 +9,43 @@ use Auth;
 
 class TimeLogRepository implements TimeLogInterface 
 {
-    public function setTime()
+    private function getTime()
     {
         return Carbon::now();
     }
 
-    public function getUser()
+    private function getUser()
     {
         return Auth::user();
     }
 
-    public function createTimeLog()
+    private function createTimeLog()
     {
         return new TimeLog;
     }
 
-    public function getTimeLogToDay() {
+    public function getTimeLogToday() {
         $user = $this->getUser();
-        $current_time = $this->setTime();
-        $today = $current_time->toDateString();
-        $check_time_log = TimeLog::where('user_id', $user->id)->where('day', $today)->first();
+        $currentTime = $this->getTime();
+        $today = $currentTime->toDateString();
+        $checkTimeLog = TimeLog::where('user_id', $user->id)->where('day', $today)->first();
 
-        return $check_time_log;
+        return $checkTimeLog;
     }
 
     public function setCheckIn() { 
         
         $this->createTimeLog()->create([
-            'check_in' => $this->setTime()->toTimeString(),
-            'day' => $this->setTime()->toDateString(),
+            'check_in' => $this->getTime()->toTimeString(),
+            'day' => $this->getTime()->toDateString(),
             'user_id' => $this->getUser()->id,
         ]);
     }
 
     public function setCheckOut($check_time_log) {
-        $current_time = $this->setTime();
-        $check_time_log->update([
-            'check_out' => $current_time->toTimeString(),
+        $currentTime = $this->getTime();
+        $checkTimeLog->update([
+            'check_out' => $currentTime->toTimeString(),
         ]);
     }
 }

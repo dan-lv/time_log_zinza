@@ -12,20 +12,20 @@ class CheckOutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $TimeLogRepository;
+    private $timeLogRepository;
 
-    public function __construct(TimeLogInterface $TimeLogRepository)
+    public function __construct(TimeLogInterface $timeLogRepository)
     {
-        $this->TimeLogRepository = $TimeLogRepository;
+        $this->timeLogRepository = $timeLogRepository;
     }
 
     public function store()
     {
-        $check_time_log = $this->TimeLogRepository->getTimeLogToDay(); 
+        $checkTimeLog = $this->timeLogRepository->getTimeLogToday(); 
 
-        if ($check_time_log) {
-            if (empty($check_time_log->check_out)) {
-                $this->TimeLogRepository->setCheckOut($check_time_log);
+        if ($checkTimeLog) {
+            if (empty($checkTimeLog->check_out)) {
+                $this->timeLogRepository->setCheckOut($checkTimeLog);
 
                 return redirect('/')->with('status', trans('time_log.check_out_success'));
             } else {

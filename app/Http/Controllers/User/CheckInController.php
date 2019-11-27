@@ -7,19 +7,20 @@ use App\Interfaces\TimeLogInterface;
 
 class CheckInController extends Controller
 {
-    private $TimeLogRepository;
+    private $timeLogRepository;
 
-    public function __construct(TimeLogInterface $TimeLogRepository)
+    public function __construct(TimeLogInterface $timeLogRepository)
     {
-        $this->TimeLogRepository = $TimeLogRepository;
+        $this->timeLogRepository = $timeLogRepository;
     }
 
     public function store()
     {
-        $check_time_log = $this->TimeLogRepository->getTimeLogToDay();
+        $checkTimeLog = $this->timeLogRepository->getTimeLogToday();
+        
 
-        if (!$check_time_log) {
-            $this->TimeLogRepository->setCheckIn();
+        if (!$checkTimeLog) {
+            $this->timeLogRepository->setCheckIn();
 
             return redirect('/')->with('status', trans('time_log.check_in_success'));
         } else {
