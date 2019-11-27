@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Contracts\Interfaces\CheckOutInterface;
+use App\Interfaces\CheckOutInterface;
 
 class CheckOutController extends Controller
 {
@@ -20,74 +19,20 @@ class CheckOutController extends Controller
         $this->checkOutRepository = $checkOutRepository;
     }
 
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store()
     {
-        return $this->checkOutRepository->checkOut();
-    }
+        $check_time_log = $this->checkOutRepository->getTimeLogToDay(); 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($check_time_log) {
+            if (empty($check_time_log->check_out)) {
+                $this->checkOutRepository->setCheckOut($check_time_log);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+                return redirect('/')->with('status', 'You checked-out successful!');
+            } else {
+                return redirect('/')->with('status', 'You checked_out today!');
+            }
+        } else {
+            return redirect('/')->with('status', 'You have to check-in first!');
+        }
     }
 }
