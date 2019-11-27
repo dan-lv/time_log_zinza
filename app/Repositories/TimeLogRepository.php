@@ -42,7 +42,7 @@ class TimeLogRepository implements TimeLogInterface
         ]);
     }
 
-    public function setCheckOut($check_time_log) {
+    public function setCheckOut($checkTimeLog) {
         $currentTime = $this->getTime();
         $checkTimeLog->update([
             'check_out' => $currentTime->toTimeString(),
