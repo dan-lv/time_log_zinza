@@ -3,27 +3,27 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\CheckInInterface;
+use App\Interfaces\TimeLogInterface;
 
 class CheckInController extends Controller
 {
-    private $checkInRepository;
+    private $TimeLogRepository;
 
-    public function __construct(CheckInInterface $checkInRepository)
+    public function __construct(TimeLogInterface $TimeLogRepository)
     {
-        $this->checkInRepository = $checkInRepository;
+        $this->TimeLogRepository = $TimeLogRepository;
     }
 
     public function store()
     {
-        $check_time_log = $this->checkInRepository->getTimeLogToDay();
+        $check_time_log = $this->TimeLogRepository->getTimeLogToDay();
 
         if (!$check_time_log) {
-            $this->checkInRepository->setCheckIn();
+            $this->TimeLogRepository->setCheckIn();
 
-            return redirect('/')->with('status', 'You checked-in successful!');
+            return redirect('/')->with('status', trans('time_log.check_in_success'));
         } else {
-            return redirect('/')->with('status', 'You checked-in one time today!');
+            return redirect('/')->with('status', trans('time_log.check_in_fail'));
         }
     }
 }

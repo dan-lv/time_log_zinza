@@ -23,8 +23,6 @@ class InterfaceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind('App\Interfaces\CheckInInterface', 'App\Repositories\CheckInRepository');
-
-        $this->app->bind('App\Interfaces\CheckOutInterface', 'App\Repositories\CheckOutRepository');
+        $this->app->bind('App\Interfaces\TimeLogInterface', 'App\Repositories\TimeLogRepository');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\CheckOutInterface;
+use App\Interfaces\TimeLogInterface;
 
 class CheckOutController extends Controller
 {
@@ -12,27 +12,27 @@ class CheckOutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $checkOutRepository;
+    private $TimeLogRepository;
 
-    public function __construct(CheckOutInterface $checkOutRepository)
+    public function __construct(TimeLogInterface $TimeLogRepository)
     {
-        $this->checkOutRepository = $checkOutRepository;
+        $this->TimeLogRepository = $TimeLogRepository;
     }
 
     public function store()
     {
-        $check_time_log = $this->checkOutRepository->getTimeLogToDay(); 
+        $check_time_log = $this->TimeLogRepository->getTimeLogToDay(); 
 
         if ($check_time_log) {
             if (empty($check_time_log->check_out)) {
-                $this->checkOutRepository->setCheckOut($check_time_log);
+                $this->TimeLogRepository->setCheckOut($check_time_log);
 
-                return redirect('/')->with('status', 'You checked-out successful!');
+                return redirect('/')->with('status', trans('time_log.check_out_success'));
             } else {
-                return redirect('/')->with('status', 'You checked_out today!');
+                return redirect('/')->with('status', trans('time_log.check_out_fail'));
             }
         } else {
-            return redirect('/')->with('status', 'You have to check-in first!');
+            return redirect('/')->with('status', trans('time_log.check_in_first'));
         }
     }
 }

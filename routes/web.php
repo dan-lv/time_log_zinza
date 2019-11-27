@@ -20,11 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([
-	'namespace' => 'User',
-	'middleware' => 'auth',
+    'namespace' => 'User',
+    'middleware' => 'auth',
 ], function() {
-	Route::resources([
-		'check-ins' => 'CheckInController',
-		'check-outs' => 'CheckOutController',
-	]);
+    Route::resource('check-ins', 'CheckInController')->only('store');
+    Route::resource('check-outs', 'CheckOutController')->only('store');
 });
