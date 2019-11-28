@@ -1,12 +1,12 @@
 <header>
     <div class="container">
         <div class="row">
-            <a href="#" class="col-4 logo">
+            <a href="/" class="col-4 logo">
                 <img src="images/logo3.png">
             </a>
             <ul class="nav col-8 justify-content-end">
                 @if (Auth::check())
-                <li class="nav-item"><a class="nav-link" href="#">List Absent</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('absents.show', Auth::user()->id) }}">List Absent</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Time-log</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
                 <li class="nav-item dropdown">
