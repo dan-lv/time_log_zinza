@@ -1,6 +1,8 @@
 header {
     padding: 15px 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background: {
+        color: rgba(0, 0, 0, 0.7);
+    }
 }
 
 a.nav-link {
@@ -10,22 +12,24 @@ a.nav-link {
 .image {
     width: 100%;
     height: 569px;
-    background-image: url("/images/banner10.jpg");
-    background-size: cover;
+    background: {
+        image: url("/images/banner10.jpg");
+        size: cover;
+    }
     position: relative;
 }
 
 .trans-text {
     position: relative;
     top: 100px;
-}
 
-.trans-text h2 {
-    font-size: 48pt;
-}
+    h2 {
+        font-size: 48pt;
+    }
 
-.trans-text h3 {
-    font-size: 32pt;
+    h3 {
+        font-size: 32pt;
+    }
 }
 
 .trans-btn {
@@ -34,14 +38,18 @@ a.nav-link {
     top: 350px;
 }
 
-button {
-    border-style: solid;
-    border-color: white;
+button.btn-secondary {
+    border: {
+        style: solid;
+        color: white;
+    }
 }
 
 .text-status {
     color: red;
     position: relative;
     top: 10px;
-    margin-bottom: 0;
+    margin: {
+        bottom: 0;
+    }
 }
