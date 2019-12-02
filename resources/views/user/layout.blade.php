@@ -22,13 +22,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-        <script>
-        $(document).ready(function() {
-            $("#notification").click(function(){
-                $(".menu-container").toggleClass("open");
-            });
-        });
-    </script>
+        <script src="{{ mix('js/user_scripts.js') }}"></script>
+        
+        @yield('scripts')
     </body>
 </html>
