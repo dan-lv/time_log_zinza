@@ -13,12 +13,12 @@
     <div class="d-flex justify-content-around trans-btn">
         <form id="form-check-in" method="POST" action="{{ route('check-ins.store') }}">
             @csrf
-            <button id="btn-check-in" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Check-in</button>                
+            <button id="btn-check-in" class="btn btn-secondary btn-modify" data-toggle="modal" data-target="#myModal">Check-in</button>                
         </form>
-            <button id="btn-absent" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Absent</button>               
+            <button id="btn-absent" class="btn btn-secondary btn-modify" data-toggle="modal" data-target="#myModal">Absent</button>               
         <form id="form-check-out" method="POST" action="{{ route('check-outs.store') }}">
             @csrf
-            <button id="btn-check-out" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Check-out</button>                
+            <button id="btn-check-out" class="btn btn-secondary btn-modify" data-toggle="modal" data-target="#myModal">Check-out</button>                
         </form>
     </div>
 

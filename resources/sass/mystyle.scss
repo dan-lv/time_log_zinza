@@ -19,26 +19,26 @@ a.nav-link {
     position: relative;
 }
 
-.trans-text {
-    position: relative;
-    top: 100px;
+.trans {
+    &-text {
+        position: relative;
+        top: 100px;
 
-    h2 {
-        font-size: 48pt;
+        h2 {
+            font-size: 48pt;
+        }
+
+        h3 {
+            font-size: 32pt;
+        }
     }
-
-    h3 {
-        font-size: 32pt;
+    &-btn {
+        position: relative;
+        top: 350px;
     }
 }
 
-.trans-btn {
-    position: relative;
-    top: px;
-    top: 350px;
-}
-
-button.btn-secondary {
+.btn-modify {
     border: {
         style: solid;
         color: white;
