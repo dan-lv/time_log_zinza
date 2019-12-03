@@ -16,4 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
    .sass('resources/sass/mystyle.scss', 'public/css/style.css')
    .copyDirectory('resources/images', 'public/images')
+   .copy('node_modules/moment/moment.js', 'public/js/moment.js')
    .version();

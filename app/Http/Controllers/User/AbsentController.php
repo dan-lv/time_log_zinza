@@ -36,11 +36,11 @@ class AbsentController extends Controller
         $checkAbsent = $this->absentRequestRepository->getAbsentToday();
     
         if (!$checkAbsent) {
-            $this->absentRequestRepository->createAbsentRequest($request);
+            $this->absentRequestRepository->createAbsentRequest($request->validated());
 
             return redirect()->route('absents.create')->with('status', __('absent.success'));
         } else {
-            return redirect()->route('absents.create')->with('status', __('absent.fail'));
+            return redirect()->route('absents.create')->with('status', __('absent.sended'));
         }
     }
 
@@ -50,9 +50,9 @@ class AbsentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function index()
     {
-        $absents = $this->absentRequestRepository->getAbsentByUserId($userId);
+        $absents = $this->absentRequestRepository->getAbsentByUserId();
 
         return view('user.show_absent')->with('absents', $absents);
     }

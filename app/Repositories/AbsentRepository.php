@@ -10,13 +10,15 @@ use Carbon\Carbon;
 
 class AbsentRepository implements AbsentInterface 
 {
-    public function createAbsentRequest(Request $request) {
+    const NUMBER_OF_ITEM = 5;
+
+    public function createAbsentRequest($request) {
         $user = Auth::user();
         AbsentRequest::create([
-            'time_absent_from' => $request->get('absent-from'),
-            'time_absent_to' => $request->get('absent-to'),
-            'day' => $request->get('date'),
-            'reason' => $request->get('reason'),
+            'time_absent_from' => $request['absent-from'],
+            'time_absent_to' => $request['absent-to'],
+            'day' => $request['day'],
+            'reason' => $request['reason'],
             'user_id' => $user->id,
         ]);
     }
@@ -30,7 +32,9 @@ class AbsentRepository implements AbsentInterface
         return $checkAbsent;
     }
 
-    public function getAbsentByUserId($userId) {
-        return AbsentRequest::where('user_id', $userId)->paginate(5);
+    public function getAbsentByUserId() {
+        $userId = Auth::user()->id;
+
+        return AbsentRequest::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
     }
 }

@@ -21,7 +21,18 @@
                     <td>{{ $absent->time_absent_from }}</td>
                     <td>{{ $absent->time_absent_to }}</td>
                     <td>{{ $absent->reason }}</td>
-                    <td>{{ $absent->status }}</td>
+                    @switch($absent->status)
+                    @case(1)
+                    <td>Accepted</td>
+                    @break
+                    
+                    @case(2)
+                    <td>Deny</td>
+                    @break
+                    
+                    @default
+                    <td>Processing</td>
+                    @endswitch
                 </tr>
                 @endforeach
             </tbody>

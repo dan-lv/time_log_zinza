@@ -25,5 +25,5 @@ Route::group([
 ], function() {
     Route::resource('check-ins', 'CheckInController')->only('store');
     Route::resource('check-outs', 'CheckOutController')->only('store');
-    Route::resource('absents', 'AbsentController')->only(['show', 'create', 'store']);
+    Route::resource('absents', 'AbsentController')->only(['index', 'create', 'store']);
 });

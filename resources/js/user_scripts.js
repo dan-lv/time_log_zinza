@@ -12,31 +12,16 @@ $(document).ready(function() {
 });
 //DateTime Picker
 $(document).ready(function(){
-    $('#timepicker1').timepicker({
-        timeFormat: 'HH:mm',
-        interval: 10,
-        minTime: '09',
-        maxTime: '17:30',
-        defaultTime: '09',
-        zindex: 9999,
-        dynamic: true,
-        dropdown: true,
-        scrollbar: false
-    });
-    $('#timepicker2').timepicker({
-        timeFormat: 'HH:mm',
-        interval: 10,
-        minTime: '09',
-        maxTime: '17:30',
-        defaultTime: '13:30',
-        dynamic: true,
-        zindex: 9999,
-        dropdown: true,
-        scrollbar: false
-    });
+    const FORMAT_TIME = 'HH:mm:ss';
+    const FORMAT_DATE = 'YYYY-MM-DD';
 
-    $("#datepicker").datepicker({ 
-        autoclose: true, 
-        todayHighlight: true
-    }).datepicker('update', new Date());
+    $('#time-absent-from').datetimepicker({
+        format: FORMAT_TIME
+    });
+    $('#time-absent-to').datetimepicker({
+        format: FORMAT_TIME
+    });
+    $('#day-absent').datetimepicker({
+        format: FORMAT_DATE
+    });
 });

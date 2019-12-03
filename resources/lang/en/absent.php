@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'success' => 'You send request successful!',
-    'fail' => 'You absent requested one time today!',
+    'success' => 'Request send successful!',
+    'sended' => 'You absent requested one time today!',
 ];
