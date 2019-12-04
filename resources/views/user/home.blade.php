@@ -1,6 +1,6 @@
 @extends('user.layout')
 @section('content')
-<div class="image">
+<div class="cover-image">
     @if (session('status'))
     <p class="d-flex justify-content-center text-status">{{ session('status') }}</p>
     @endif

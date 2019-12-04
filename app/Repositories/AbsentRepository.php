@@ -12,6 +12,10 @@ class AbsentRepository implements AbsentInterface
 {
     const NUMBER_OF_ITEM = 5;
 
+    public function getUserId() {
+        return Auth::user()->id;
+    }
+
     public function createAbsentRequest($request) {
         $user = Auth::user();
         AbsentRequest::create([
@@ -32,8 +36,7 @@ class AbsentRepository implements AbsentInterface
         return $checkAbsent;
     }
 
-    public function getAbsentByUserId() {
-        $userId = Auth::user()->id;
+    public function getAbsentByUserId($userId) {
 
         return AbsentRequest::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
     }

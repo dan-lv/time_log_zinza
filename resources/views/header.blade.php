@@ -6,7 +6,7 @@
             </a>
             <ul class="nav col-8 justify-content-end">
                 @if (Auth::check())
-                <li class="nav-item"><a class="nav-link" href="{{ route('absents.index', Auth::user()->id) }}">List Absent</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('absents.index') }}">List Absent</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Time-log</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
                 <li class="nav-item dropdown">

@@ -22,7 +22,7 @@ class AbsentController extends Controller
 
     public function create()
     {
-        return view('user.absent');
+        return view('user.absent.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class AbsentController extends Controller
 
             return redirect()->route('absents.create')->with('status', __('absent.success'));
         } else {
-            return redirect()->route('absents.create')->with('status', __('absent.sended'));
+            return redirect()->route('absents.create')->with('status', __('absent.already_sent'));
         }
     }
 
@@ -52,8 +52,9 @@ class AbsentController extends Controller
      */
     public function index()
     {
-        $absents = $this->absentRequestRepository->getAbsentByUserId();
+        $userId = $this->absentRequestRepository->getUserId();
+        $absents = $this->absentRequestRepository->getAbsentByUserId($userId);
 
-        return view('user.show_absent')->with('absents', $absents);
+        return view('user.absent.index')->with('absents', $absents);
     }
 }

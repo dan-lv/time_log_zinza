@@ -24,8 +24,8 @@ class AbsentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'absent-from' => 'required',
-            'absent-to' => 'required',
+            'absent-from' => 'required|date_format: H:i:s',
+            'absent-to' => 'required|date_format: Y-m-d',
             'day' => 'required',
             'reason' => 'required',
         ];
