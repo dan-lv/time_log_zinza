@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\TimeLogInterface;
+use App\Interfaces\UserInterface;
 
 class CheckOutController extends Controller
 {
@@ -13,15 +14,18 @@ class CheckOutController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $timeLogRepository;
+    private $userRepository;
 
-    public function __construct(TimeLogInterface $timeLogRepository)
+    public function __construct(TimeLogInterface $timeLogRepository, UserInterface $userRepository)
     {
         $this->timeLogRepository = $timeLogRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function store()
     {
-        $checkTimeLog = $this->timeLogRepository->getTimeLogToday(); 
+        $userId = $this->userRepository->getCurrentUserId();
+        $checkTimeLog = $this->timeLogRepository->getTimeLogToday($userId); 
 
         if ($checkTimeLog) {
             if (empty($checkTimeLog->check_out)) {

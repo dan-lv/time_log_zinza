@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\AbsentInterface;
+use App\Interfaces\UserInterface;
 use App\Http\Requests\AbsentFormRequest;
 use App\Events\SendedAbsentRequest;
 use Mail;
@@ -16,10 +17,12 @@ class AbsentController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $absentRequestRepository;
+    private $userRepository;
 
-    public function __construct(AbsentInterface $absentRequestRepository)
+    public function __construct(AbsentInterface $absentRequestRepository, UserInterface $userRepository)
     {
         $this->absentRequestRepository = $absentRequestRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function create()
@@ -35,10 +38,11 @@ class AbsentController extends Controller
      */
     public function store(AbsentFormRequest $request)
     {
-        $checkAbsent = $this->absentRequestRepository->getAbsentToday();
+        $userId = $this->userRepository->getCurrentUserId();
+        $checkAbsent = $this->absentRequestRepository->getAbsentToday($userId);
     
         if (!$checkAbsent) {
-            $absent = $this->absentRequestRepository->createAbsentRequest($request->validated());
+            $absent = $this->absentRequestRepository->createAbsentRequest($request->validated(), $userId);
 
             event(new SendedAbsentRequest($absent));
 
@@ -57,7 +61,7 @@ class AbsentController extends Controller
 
     public function index()
     {
-        $userId = $this->absentRequestRepository->getUserId();
+        $userId = $this->userRepository->getCurrentUserId();
         $absents = $this->absentRequestRepository->getAbsentByUserId($userId);
 
         return view('user.absent.index')->with('absents', $absents);

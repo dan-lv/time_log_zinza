@@ -25,5 +25,6 @@ class InterfaceServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Interfaces\TimeLogInterface', 'App\Repositories\TimeLogRepository');
         $this->app->bind('App\Interfaces\AbsentInterface', 'App\Repositories\AbsentRepository');
+        $this->app->bind('App\Interfaces\UserInterface', 'App\Repositories\UserRepository');
     }
 }
