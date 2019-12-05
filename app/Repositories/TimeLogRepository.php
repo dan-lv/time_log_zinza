@@ -9,12 +9,14 @@ use Auth;
 
 class TimeLogRepository implements TimeLogInterface 
 {
+    const NUMBER_OF_ITEM = 10;
+
     private function getTime()
     {
         return Carbon::now();
     }
 
-    private function getUser()
+    public function getUser()
     {
         return Auth::user();
     }
@@ -47,5 +49,10 @@ class TimeLogRepository implements TimeLogInterface
         $checkTimeLog->update([
             'check_out' => $currentTime->toTimeString(),
         ]);
+    }
+
+    public function getTimeLogByUserId($userId) {
+
+        return TimeLog::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
     }
 }
