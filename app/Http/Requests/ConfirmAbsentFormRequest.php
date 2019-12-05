@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AbsentFormRequest extends FormRequest
+class ConfirmAbsentFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class AbsentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'absent-from' => 'required',
-            'absent-to' => 'required',
-            'day' => 'required',
-            'reason' => 'required',
+            'action' => 'required',
         ];
     }
 }
