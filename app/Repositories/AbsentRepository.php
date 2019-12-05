@@ -4,34 +4,26 @@ namespace App\Repositories;
 use Illuminate\Http\Request;
 use App\Interfaces\AbsentInterface;
 use App\Models\AbsentRequest;
-use App\Models\User;
-use Auth;
 use Carbon\Carbon;
 
 class AbsentRepository implements AbsentInterface 
 {
     const NUMBER_OF_ITEM = 5;
 
-    public function getUserId() {
-        return Auth::user()->id;
-    }
-
-    public function createAbsentRequest($request) {
-        $user = Auth::user();
+    public function createAbsentRequest($request, $userId) {
         AbsentRequest::create([
             'time_absent_from' => $request['absent-from'],
             'time_absent_to' => $request['absent-to'],
             'day' => $request['day'],
             'reason' => $request['reason'],
-            'user_id' => $user->id,
+            'user_id' => $userId,
         ]);
     }
 
-    public function getAbsentToday() {
-        $user = Auth::user();
+    public function getAbsentToday($userId) {
         $currentTime = Carbon::now();
         $today = $currentTime->toDateString();
-        $checkAbsent = AbsentRequest::where('user_id', $user->id)->where('day', $today)->first();
+        $checkAbsent = AbsentRequest::where('user_id', $userId)->where('day', $today)->first();
 
         return $checkAbsent;
     }

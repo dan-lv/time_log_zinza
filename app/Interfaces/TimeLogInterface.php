@@ -3,8 +3,8 @@ namespace App\Interfaces;
 
 interface TimeLogInterface
 {
-    public function getTimeLogToday();
-    public function setCheckIn();
+    public function getTimeLogToday($userId);
+    public function setCheckIn($userId);
     public function setCheckOut(object $checkTimeLog);
-    public function getTimeLogByUserId($userId);
+    public function getTimeLogsByUserId($userId);
 }
