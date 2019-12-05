@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Interfaces\AbsentInterface;
 use App\Http\Requests\AbsentFormRequest;
+use App\Events\AbsentRequested;
 
 class AbsentController extends Controller
 {
@@ -37,6 +38,7 @@ class AbsentController extends Controller
     
         if (!$checkAbsent) {
             $this->absentRequestRepository->createAbsentRequest($request->validated());
+            event(new AbsentRequested);
 
             return redirect()->route('absents.create')->with('status', __('absent.success'));
         } else {
