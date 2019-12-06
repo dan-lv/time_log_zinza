@@ -5,7 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Interfaces\AbsentInterface;
 use App\Http\Requests\AbsentFormRequest;
-use App\Events\AbsentRequested;
+use App\Events\SendedAbsentRequest;
+use Mail;
 
 class AbsentController extends Controller
 {
@@ -37,8 +38,9 @@ class AbsentController extends Controller
         $checkAbsent = $this->absentRequestRepository->getAbsentToday();
     
         if (!$checkAbsent) {
-            $this->absentRequestRepository->createAbsentRequest($request->validated());
-            event(new AbsentRequested);
+            $absent = $this->absentRequestRepository->createAbsentRequest($request->validated());
+
+            event(new SendedAbsentRequest($absent));
 
             return redirect()->route('absents.create')->with('status', __('absent.success'));
         } else {

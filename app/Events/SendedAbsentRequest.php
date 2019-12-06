@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\AbsentRequest;
 
-class AbsentRequested
+class SendedAbsentRequest
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

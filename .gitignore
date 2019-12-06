@@ -7,6 +7,7 @@
 /public/js
 /public/images
 /public/mix-manifest.json
+/storage/debugbar
 .env
 .env.backup
 .phpunit.result.cache

@@ -18,7 +18,7 @@ class AbsentRepository implements AbsentInterface
 
     public function createAbsentRequest($request) {
         $user = Auth::user();
-        AbsentRequest::create([
+        return AbsentRequest::create([
             'time_absent_from' => $request['absent-from'],
             'time_absent_to' => $request['absent-to'],
             'day' => $request['day'],

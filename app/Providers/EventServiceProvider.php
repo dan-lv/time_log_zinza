@@ -19,7 +19,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        'App\Events\AbsentRequested' => [
+        'App\Events\SendedAbsentRequest' => [
             'App\Listeners\SendEmailAbsentNotification',
         ],
     ];
