@@ -6,6 +6,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Events\UserCreated;
+use App\Listeners\CreateProfile;
+use App\Events\SendedAbsentRequest;
+use App\Listeners\SendEmailAbsentNotification;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,8 +23,12 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        'App\Events\SendedAbsentRequest' => [
-            'App\Listeners\SendEmailAbsentNotification',
+        SendedAbsentRequest::class => [
+            SendEmailAbsentNotification::class,
+        ],
+            
+        UserCreated::class => [
+            CreateProfile::class,
         ],
     ];
 
