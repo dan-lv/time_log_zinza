@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\TimeLogInterface;
 use App\Interfaces\UserInterface;
 
-class CheckInController extends Controller
+class TimeLogController extends Controller
 {
     private $timeLogRepository;
     private $userRepository;
@@ -17,18 +17,11 @@ class CheckInController extends Controller
         $this->userRepository = $userRepository;
     }
 
-    public function store()
+    public function index()
     {
         $userId = $this->userRepository->getCurrentUserId();
-        $checkTimeLog = $this->timeLogRepository->getTimeLogToday($userId);
+        $timeLogs = $this->timeLogRepository->getTimeLogsByUserId($userId);
         
-
-        if (!$checkTimeLog) {
-            $this->timeLogRepository->setCheckIn($userId);
-
-            return redirect('/')->with('status', trans('time_log.check_in_success'));
-        } else {
-            return redirect('/')->with('status', trans('time_log.check_in_fail'));
-        }
+        return view('user.timelog.index')->with('timeLogs', $timeLogs);
     }
 }

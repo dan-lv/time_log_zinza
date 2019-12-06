@@ -26,4 +26,5 @@ Route::group([
     Route::resource('check-ins', 'CheckInController')->only('store');
     Route::resource('check-outs', 'CheckOutController')->only('store');
     Route::resource('absents', 'AbsentController')->only(['index', 'create', 'store']);
+    Route::resource('timelogs', 'TimeLogController')->only('index');
 });
