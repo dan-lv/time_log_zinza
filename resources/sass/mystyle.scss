@@ -36,6 +36,10 @@ a.nav-link {
         position: relative;
         top: 350px;
     }
+    &-form {
+        position: relative;
+        top: 50px;
+    }
 }
 
 .btn-modify {
@@ -89,4 +93,18 @@ input.timepicker {
 
 .row.trans-table {
     margin-top: 15px;
+}
+
+.form-profile {
+    border: solid #f8f9fa;
+    padding-left: 50px;
+}
+
+[class*="col-"]{
+    margin-bottom: -10px;
+    padding-bottom: 10px;
+}
+
+.avatar {
+    padding-bottom: 0;
 }
