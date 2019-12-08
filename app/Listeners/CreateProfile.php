@@ -4,8 +4,8 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Interfaces\ProfileInterface;
 use App\Events\UserCreated;
-use App\Models\Profile;
 
 class CreateProfile
 {
@@ -14,9 +14,11 @@ class CreateProfile
      *
      * @return void
      */
-    public function __construct()
+    private $profileRepository;
+
+    public function __construct(ProfileInterface $profileRepository)
     {
-        //
+        $this->profileRepository = $profileRepository;
     }
 
     /**
@@ -27,9 +29,6 @@ class CreateProfile
      */
     public function handle(UserCreated $event)
     {
-        Profile::create([
-            'user_id' => $event->user->id,
-            'fullname' => $event->user->name,
-        ]);
+        $this->profileRepository->createProfile($event);
     }
 }

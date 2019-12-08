@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Http\Requests\ImageFormRequest;
+use App\Http\Requests\AvatarFormRequest;
 use App\Http\Requests\ProfileFormRequest;
 use App\Interfaces\ProfileInterface;
 use App\Interfaces\UserInterface;
@@ -23,11 +22,6 @@ class ProfileController extends Controller
     {
         $this->profileRepository = $profileRepository;
         $this->userRepository = $userRepository;
-    }
-
-    public function create()
-    {
-        return view('user.absent');
     }
 
     /**
@@ -50,11 +44,11 @@ class ProfileController extends Controller
         return redirect()->route('profiles.show', $userId)->with('status', 'Your Profile has been updated');
     }
 
-    public function storeImage(ImageFormRequest $request)
+    public function storeImage(AvatarFormRequest $request)
     {
         $userId = $this->userRepository->getCurrentUserId();
-        $profile = $this->profileRepository->storeImage($request, $userId);
+        $profile = $this->profileRepository->storeImage($request->validated(), $userId);
 
-        return redirect()->route('profiles.show', $userId)->with('profile', $profile);
+        return redirect()->route('profiles.show', $userId);
     }
 }
