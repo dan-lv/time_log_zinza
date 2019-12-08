@@ -24,7 +24,7 @@ class ProfileRepository implements ProfileInterface
     }
 
     public function storeImage($request, $userId) {
-        $image = $request->file('image');
+        $image = $request['image'];
         $nameImage = $image->getClientOriginalName();
         $image->move('images', $nameImage);
         $profile = Profile::where('user_id', $userId)->first();
@@ -33,5 +33,12 @@ class ProfileRepository implements ProfileInterface
         $profile->save();
 
         return $profile;
+    }
+
+    public function createProfile($event) {
+        Profile::create([
+            'user_id' => $event->user->id,
+            'fullname' => $event->user->name,
+        ]);
     }
 }

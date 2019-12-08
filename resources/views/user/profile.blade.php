@@ -27,7 +27,7 @@
             <div class="form-group row">
                 <label for="fullname" class="col-sm-2 col-form-label">Full Name</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="fullname" id="fullname" value="{{ Auth::user()->name }}">
+                    <input type="text" class="form-control" name="fullname" id="fullname" value="{{ old('fullname', Auth::user()->name) }}">
                 </div>
             </div>
 
@@ -36,12 +36,12 @@
                 <div class="col-sm-8">
                     <select class="custom-select" id="gender" name="gender">
                         @if ($profile->gender == 0)
-                        <option value="0" selected="">Nam</option>
-                        <option value="1">Nu</option>
+                        <option value="0" selected="">Male</option>
+                        <option value="1">Female</option>
                         @endif
                         @if ($profile->gender == 1)
-                        <option value="0">Nam</option>
-                        <option value="1" selected="">Nu</option>
+                        <option value="0">Male</option>
+                        <option value="1" selected="">Female</option>
                         @endif
                     </select>
                 </div>
@@ -50,28 +50,28 @@
             <div class="form-group row">
                 <label for="birthday" class="col-sm-2 col-form-label">Birthday</label>
                 <div class="col-sm-8">
-                    <input id="birthday" class="form-control" type="text" name="birthday" placeholder="Your Birthday is empty" value="{{ $profile->birthday }}">
+                    <input id="birthday" class="form-control" type="text" name="birthday" placeholder="Your Birthday is empty" value="{{ old('birthday', $profile->birthday) }}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Phone is empty" value="{{ $profile->phone_number }}">
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Phone is empty" value="{{ old('phone', $profile->phone_number) }}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="address" class="col-sm-2 col-form-label">Address</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Your Address is empty" value="{{ $profile->address }}">
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Your Address is empty" value="{{ old('address', $profile->address) }}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="position" class="col-sm-2 col-form-label">Position</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="position" name="position" placeholder="Your Position is empty" value="{{ $profile->position }}">
+                    <input type="text" class="form-control" id="position" name="position" placeholder="Your Position is empty" value="{{ old('position', $profile->position) }}">
                 </div>
             </div>
             <div class="form-group row">
@@ -87,9 +87,9 @@
 
 @section('scripts')
 <script>
-    $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    $('.custom-file-input').on('change', function() {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
     });
 </script>
 @endsection
