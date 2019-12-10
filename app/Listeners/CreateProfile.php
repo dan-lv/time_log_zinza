@@ -29,6 +29,6 @@ class CreateProfile
      */
     public function handle(UserCreated $event)
     {
-        $this->profileRepository->createProfile($event);
+        $this->profileRepository->createProfile($event->user);
     }
 }

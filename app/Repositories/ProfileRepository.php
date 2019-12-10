@@ -35,10 +35,10 @@ class ProfileRepository implements ProfileInterface
         return $profile;
     }
 
-    public function createProfile($event) {
+    public function createProfile(object $user) {
         Profile::create([
-            'user_id' => $event->user->id,
-            'fullname' => $event->user->name,
+            'user_id' => $user->id,
+            'fullname' => $user->name,
         ]);
     }
 }
