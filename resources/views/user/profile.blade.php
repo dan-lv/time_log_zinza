@@ -35,14 +35,22 @@
                 <label for="gender" class="col-sm-2 col-form-label">Gender</label>
                 <div class="col-sm-8">
                     <select class="custom-select" id="gender" name="gender">
-                        @if ($profile->gender == 0)
-                        <option value="0" selected="">Male</option>
-                        <option value="1">Female</option>
-                        @endif
-                        @if ($profile->gender == 1)
-                        <option value="0">Male</option>
-                        <option value="1" selected="">Female</option>
-                        @endif
+                        <option value="{{ old('gender', $profile->gender) }}" selected="">
+                            @if (old('gender', $profile->gender) == 0)
+                            Male
+                            @endif
+                            @if (old('gender', $profile->gender) == 1)
+                            Female
+                            @endif
+                        </option>
+                        <option value="{{ 1 - old('gender', $profile->gender) }}">
+                            @if ((1 - old('gender', $profile->gender)) == 0)
+                            Male
+                            @endif
+                            @if ((1 - old('gender', $profile->gender)) == 1)
+                            Female
+                            @endif
+                        </option>
                     </select>
                 </div>
             </div>
