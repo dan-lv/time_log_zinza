@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $profile->fullname }}</h5>
                     <p class="card-text"></p>
-                    <form method="POST" action="{{ route('profiles.image') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('profiles.avatar') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="customFile" name="image">

@@ -6,5 +6,5 @@ interface ProfileInterface
     public function getProfile($userId);
     public function updateProfile($request, $userId);
     public function storeImage($request, $userId);
-    public function createProfile($event);
+    public function createProfile(object $user);
 }

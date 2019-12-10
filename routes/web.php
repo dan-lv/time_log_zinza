@@ -27,6 +27,6 @@ Route::group([
     Route::resource('check-outs', 'CheckOutController')->only('store');
     Route::resource('absents', 'AbsentController')->only(['index', 'create', 'store']);
     Route::resource('timelogs', 'TimeLogController')->only('index');
-    Route::resource('profiles', 'ProfileController');
-    Route::post('/profiles/upload-avatar', 'ProfileController@storeImage')->name('profiles.image');
+    Route::resource('profiles', 'ProfileController')->only('show', 'update');
+    Route::post('/profiles/upload-avatar', 'ProfileController@storeAvatar')->name('profiles.avatar');
 });

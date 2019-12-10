@@ -44,7 +44,7 @@ class ProfileController extends Controller
         return redirect()->route('profiles.show', $userId)->with('status', 'Your Profile has been updated');
     }
 
-    public function storeImage(AvatarFormRequest $request)
+    public function storeAvatar(AvatarFormRequest $request)
     {
         $userId = $this->userRepository->getCurrentUserId();
         $profile = $this->profileRepository->storeImage($request->validated(), $userId);
