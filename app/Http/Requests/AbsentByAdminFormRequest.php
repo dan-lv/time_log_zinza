@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AbsentFormRequest extends FormRequest
+class AbsentByAdminFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class AbsentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'absent-from' => 'required|date_format: H:i:s',
-            'absent-to' => 'required|date_format: H:i:s',
+            'absent_from' => 'required|date_format: H:i:s',
+            'absent_to' => 'required|date_format: H:i:s',
             'day' => 'required|date_format: Y-m-d',
             'reason' => 'required',
+            'user_id' => 'required|numeric',
         ];
     }
 }
