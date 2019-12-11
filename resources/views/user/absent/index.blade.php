@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('layout')
 @section('content')
 <div class="container">
     <div class="row trans-table">

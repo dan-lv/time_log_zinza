@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Interfaces\AbsentInterface;
 use App\Http\Requests\AbsentFormRequest;
+use App\Http\Requests\AbsentByAdminFormRequest;
 use App\Http\Requests\ConfirmAbsentFormRequest;
 
 class ManageAbsentController extends Controller
@@ -28,36 +29,19 @@ class ManageAbsentController extends Controller
         return view('admin.absent.index')->with('absents', $absents);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.absent.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(AbsentByAdminFormRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $absent = $this->absentRequestRepository->createAbsentByAdmin($request->validated()); 
+    
+        return view('admin.absent.show')->with([
+            'status' => __('absent.create_success'),
+            'absent' => $absent,      
+        ]);
     }
 
     /**
@@ -84,13 +68,27 @@ class ManageAbsentController extends Controller
     {
         $this->absentRequestRepository->updateAbsent($request->validated(), $id);
 
-        return redirect()->back();
+        return back()->with('status', __('absent.edit_success'));
     }
 
     public function confirm(ConfirmAbsentFormRequest $request, $id)
     {
         $this->absentRequestRepository->confirmAbsent($request->validated(), $id);
 
-        return redirect()->route('ad-absents.index');  
+        return back();  
+    }
+
+    public function absentOfUser($userId)
+    {
+        $absents = $this->absentRequestRepository->getAbsentByUserId($userId);
+
+        return view('admin.absent.absent_user')->with('absents', $absents);
+    }
+
+    public function absentProcessing()
+    {
+        $absents = $this->absentRequestRepository->getAbsentProcessing();
+
+        return view('admin.absent.index')->with('absents', $absents);
     }
 }

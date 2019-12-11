@@ -63,4 +63,19 @@ class AbsentRepository implements AbsentInterface
 
         return AbsentRequest::where('id', $id)->first();
     }
+
+    public function createAbsentByAdmin($request) {
+        return AbsentRequest::create([
+            'time_absent_from' => $request['absent_from'],
+            'time_absent_to' => $request['absent_to'],
+            'day' => $request['day'],
+            'reason' => $request['reason'],
+            'user_id' => $request['user_id'],
+        ]);
+    }
+
+    public function getAbsentProcessing() {
+
+        return AbsentRequest::where('status', 0)->paginate(self::NUMBER_OF_ITEM);
+    }
 }

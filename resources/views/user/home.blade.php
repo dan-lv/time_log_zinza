@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('layout')
 @section('content')
 <div class="cover-image">
     @if (session('status'))
