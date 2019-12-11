@@ -8,6 +8,9 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
         <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}"> 
     </head>
     <body>
@@ -16,13 +19,9 @@
             @yield('content')
         </div> 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-        $(document).ready(function() {
-            $("#notification").click(function(){
-                $(".menu-container").toggleClass("open");
-            });
-        });
-    </script>
+        <script src="{{ mix('js/library.js') }}"></script>
+        <script src="{{ mix('js/user_scripts.js') }}"></script>
+        
+        @yield('scripts')
     </body>
 </html>
