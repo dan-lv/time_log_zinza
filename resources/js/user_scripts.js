@@ -24,4 +24,7 @@ $(document).ready(function(){
     $('#day-absent').datetimepicker({
         format: FORMAT_DATE
     });
+    $('#birthday').datetimepicker({
+        format: FORMAT_DATE
+    });
 });
