@@ -13,7 +13,7 @@
     </div>
     
     <div class="row trans-table">
-        <table class="table table-hover">
+        <table id="manage-absents" class="table table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Day</th>
@@ -78,6 +78,5 @@
             </tbody>
         </table>
     </div>
-    <div class="d-flex justify-content-end">{{ $absents->links()}}</div>
 </div>
 @endsection

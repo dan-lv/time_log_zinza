@@ -11,6 +11,7 @@ $(document).ready(function() {
         const formSelector = $(this).data('form');
         $(formSelector).submit();
     });
+    $('#manage-absents').DataTable();
 });
 //DateTime Picker
 $(document).ready(function(){

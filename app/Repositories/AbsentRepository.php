@@ -35,7 +35,7 @@ class AbsentRepository implements AbsentInterface
 
     public function getAllAbsent() {
 
-        return AbsentRequest::paginate(self::NUMBER_OF_ITEM);
+        return AbsentRequest::all();
     }
 
     public function updateAbsent($request, $id) {
