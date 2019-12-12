@@ -24,7 +24,7 @@ class ManageAbsentController extends Controller
 
     public function index()
     {
-        $absents = $this->absentRequestRepository->getAllAbsent();
+        $absents = $this->absentRequestRepository->getAllAbsents();
 
         return view('admin.absent.index')->with('absents', $absents);
     }
@@ -87,7 +87,7 @@ class ManageAbsentController extends Controller
 
     public function absentProcessing()
     {
-        $absents = $this->absentRequestRepository->getAbsentProcessing();
+        $absents = $this->absentRequestRepository->getAbsentsProcessing();
 
         return view('admin.absent.index')->with('absents', $absents);
     }

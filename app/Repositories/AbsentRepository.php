@@ -33,9 +33,9 @@ class AbsentRepository implements AbsentInterface
         return AbsentRequest::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
     }
 
-    public function getAllAbsent() {
+    public function getAllAbsents() {
 
-        return AbsentRequest::paginate(self::NUMBER_OF_ITEM);
+        return AbsentRequest::with('user')->paginate(self::NUMBER_OF_ITEM);
     }
 
     public function updateAbsent($request, $id) {
@@ -74,7 +74,7 @@ class AbsentRepository implements AbsentInterface
         ]);
     }
 
-    public function getAbsentProcessing() {
+    public function getAbsentsProcessing() {
 
         return AbsentRequest::where('status', 0)->paginate(self::NUMBER_OF_ITEM);
     }
