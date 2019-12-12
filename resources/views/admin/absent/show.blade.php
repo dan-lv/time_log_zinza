@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="reason">Reason:</label>
-                <input id="reason" class="form-control" type="text" value="{{ $absent->reason }}" readonly="">
+                <textarea class="form-control" rows="3" id="reason" name="reason" readonly="">{{ $absent->reason }}</textarea>
             </div>     
         </div>
     </div>

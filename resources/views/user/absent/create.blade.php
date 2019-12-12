@@ -9,12 +9,12 @@
             <h2 class="d-flex justify-content-center"> Fill the following form </h2>
             <div class="form-group">
                 <label for="time-absent-from">Absent from:</label>
-                <input type="text" name="absent-from" class="form-control timepicker" id="time-absent-from">
+                <input type="text" name="absent_from" class="form-control timepicker" id="time-absent-from">
             </div>
 
             <div class="form-group">
                 <label for="time-absent-to">Absent to:</label>
-                <input type="text" name="absent-to" class="form-control timepicker" id="time-absent-to">
+                <input type="text" name="absent_to" class="form-control timepicker" id="time-absent-to">
             </div>
             
             <div class="form-group">

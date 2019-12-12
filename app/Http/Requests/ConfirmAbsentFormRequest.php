@@ -24,7 +24,7 @@ class ConfirmAbsentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'action' => 'required',
+            'action' => 'required|in([0, 1, 2])',
         ];
     }
 }

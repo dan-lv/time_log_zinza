@@ -45,13 +45,13 @@
                                 <form method="POST" action="{{ route('ad-absents.confirm', $absent->id) }}">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="number" name="action" value="1" style="display: none;">
+                                    <input type="hidden" name="action" value="1">
                                     <button class="dropdown-item" type="submit">Accept</button>
                                 </form>
                                 <form method="POST" action="{{ route('ad-absents.confirm', $absent->id) }}">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="number" name="action" value="2" style="display: none;">
+                                    <input type="hidden" name="action" value="2">
                                     <button class="dropdown-item" type="submit">Deny</button>
                                 </form>
                             </div>
