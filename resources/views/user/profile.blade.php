@@ -21,13 +21,12 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="{{ route('profiles.update', Auth::user()->id) }}" class="col-8 form-profile d-flex flex-column justify-content-around">
+        <form method="POST" action="{{ route('profiles.store') }}" class="col-8 form-profile d-flex flex-column justify-content-around">
             @csrf
-            @method('PUT')
             <div class="form-group row">
                 <label for="fullname" class="col-sm-2 col-form-label">Full Name</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="fullname" id="fullname" value="{{ old('fullname', Auth::user()->name) }}">
+                    <input type="text" class="form-control" name="fullname" id="fullname" value="{{ old('fullname', $profile->fullname) }}">
                 </div>
             </div>
 
