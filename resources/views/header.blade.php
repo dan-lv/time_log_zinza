@@ -8,7 +8,7 @@
                 @if (Auth::check())
                 <li class="nav-item"><a class="nav-link" href="{{ route('absents.index') }}">List Absent</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('timelogs.index') }}">Time-log</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('profiles.show', Auth::user()->id) }}">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('profiles.index') }}">Profile</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Notification</a>
                     <div class="dropdown-menu">
