@@ -24,9 +24,9 @@ class AbsentByAdminFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'absent_from' => 'required|date_format: H:i:s',
-            'absent_to' => 'required|date_format: H:i:s',
-            'day' => 'required|date_format: Y-m-d',
+            'absent_from' => 'required',
+            'absent_to' => 'required',
+            'day' => 'required',
             'reason' => 'required',
             'user_id' => 'required|numeric',
         ];
