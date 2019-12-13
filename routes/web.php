@@ -30,3 +30,14 @@ Route::group([
     Route::resource('profiles', 'ProfileController')->only('show', 'update');
     Route::post('/profiles/upload-avatar', 'ProfileController@storeAvatar')->name('profiles.avatar');
 });
+
+Route::namespace('Admin')
+->name('manage.')
+->middleware('manage')
+->prefix('manage')
+->group(function() {
+    Route::resource('absents', 'ManageAbsentController')->except('show');
+    Route::get('absents/user/{userId}', 'ManageAbsentController@absentOfUser')->name('absents.absent_user');
+    Route::get('absents/processing', 'ManageAbsentController@processingAbsents')->name('absents.processing');
+    Route::patch('absents/status/{absent}', 'ManageAbsentController@confirm')->name('absents.confirm');
+});

@@ -10,10 +10,14 @@ class AbsentRepository implements AbsentInterface
 {
     const NUMBER_OF_ITEM = 5;
 
+    public function model() {
+        return new AbsentRequest;
+    }
+
     public function createAbsentRequest($request, $userId) {
         AbsentRequest::create([
-            'time_absent_from' => $request['absent-from'],
-            'time_absent_to' => $request['absent-to'],
+            'time_absent_from' => $request['absent_from'],
+            'time_absent_to' => $request['absent_to'],
             'day' => $request['day'],
             'reason' => $request['reason'],
             'user_id' => $userId,
@@ -31,5 +35,51 @@ class AbsentRepository implements AbsentInterface
     public function getAbsentByUserId($userId) {
 
         return AbsentRequest::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
+    }
+
+    public function getAllAbsents() {
+
+        return AbsentRequest::with('user')->paginate(self::NUMBER_OF_ITEM);
+    }
+
+    public function updateAbsent($request, $id) {
+        
+        $absent = $this->getAbsentById($id);
+
+        $absent->update([
+            'time_absent_from' => $request['absent_from'],
+            'time_absent_to' => $request['absent_to'],
+            'day' => $request['day'],
+            'reason' => $request['reason'],
+        ]);        
+    }
+
+    public function confirmAbsent($request, $id) {
+        
+        $absent = $this->getAbsentById($id);
+
+        $absent->update([
+            'status' => $request['action'],
+        ]);
+    }
+
+    public function getAbsentById($id) {
+
+        return AbsentRequest::where('id', $id)->first();
+    }
+
+    public function createAbsentByAdmin($request) {
+        return AbsentRequest::create([
+            'time_absent_from' => $request['absent_from'],
+            'time_absent_to' => $request['absent_to'],
+            'day' => $request['day'],
+            'reason' => $request['reason'],
+            'user_id' => $request['user_id'],
+        ]);
+    }
+
+    public function getProcessingAbsents() {
+
+        return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_PROCESSING)->paginate(self::NUMBER_OF_ITEM);
     }
 }
