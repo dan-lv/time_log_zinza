@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-5"></div>
         <div class="col-5">
-            <form method="GET" action="{{ route('ad-absents.processing') }}">
+            <form method="GET" action="{{ route('manage.absents.processing') }}">
                 <button class="btn btn-secondary mt-2" type="submit">Absent Processing</button>
             </form>
         </div>
         <div class="col-2">
-            <form method="GET" action="{{ route('ad-absents.create') }}">
+            <form method="GET" action="{{ route('manage.absents.create') }}">
                 <button class="btn btn-secondary mt-2" type="submit">Create Absent</button>
             </form>
         </div>   
@@ -50,7 +50,7 @@
                     <td>Processing</td>
                     @endswitch
                     <td>
-                        <a href="{{ route('ad-absents.absent_user', $absent->user_id) }}">
+                        <a href="{{ route('manage.absents.absent_user', $absent->user_id) }}">
                             {{ $absent->user->name }}
                         </a>
                     </td>
@@ -60,16 +60,16 @@
                                 Action
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <form method="GET" action="{{ route('ad-absents.edit', $absent->id) }}">
+                                <form method="GET" action="{{ route('manage.absents.edit', $absent->id) }}">
                                     <button class="dropdown-item" type="submit">Edit</button>
                                 </form>
-                                <form method="POST" action="{{ route('ad-absents.confirm', $absent->id) }}">
+                                <form method="POST" action="{{ route('manage.absents.confirm', $absent->id) }}">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="action" value="1">
                                     <button class="dropdown-item" type="submit">Accept</button>
                                 </form>
-                                <form method="POST" action="{{ route('ad-absents.confirm', $absent->id) }}">
+                                <form method="POST" action="{{ route('manage.absents.confirm', $absent->id) }}">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="action" value="2">

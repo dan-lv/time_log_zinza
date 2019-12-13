@@ -2,7 +2,7 @@
 @section('content')
 <div class="cover-image">
     @include('status')
-    <div class="container modify">
+    <div class="container pt-3">
         <form class="form-absent container" method="POST" action="{{ route('absents.store') }}" >
             @csrf
             @include('message_validation')

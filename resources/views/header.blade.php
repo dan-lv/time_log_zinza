@@ -21,15 +21,15 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('ad-absents.index') }}">Manage Absent</a>
+                                <a class="dropdown-item" href="{{ route('manage.absents.index') }}">Manage Absent</a>
                                 <a class="dropdown-item" href="#">Manage Time Logs</a>
                                 <a class="dropdown-item" href="#">Manage User</a>
                             </div>
                         </li>
                     @else
-                        <li class="nav-item"><a class="nav-link" href="#">Chao [ {{ Auth::user()->name }} ]</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Welcome [ {{ Auth::user()->name }} ]</a></li>
                     @endif
-                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Logout</a></li>
                 @else
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                 @endif
