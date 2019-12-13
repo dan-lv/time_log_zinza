@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-center">
         <h3>Name of Staff: {{ $absent->user->name }}</h3>
     </div>
-    <div class="container modify">
+    <div class="container pt-3">
         <div class="form-absent container">    
             <div class="form-group">
                 <label for="time-absent-from">Absent from:</label>

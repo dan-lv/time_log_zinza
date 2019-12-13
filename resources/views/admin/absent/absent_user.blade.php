@@ -39,16 +39,16 @@
                                 Action
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <form method="GET" action="{{ route('ad-absents.edit', $absent->id) }}">
+                                <form method="GET" action="{{ route('manage.absents.edit', $absent->id) }}">
                                     <button class="dropdown-item" type="submit">Edit</button>
                                 </form>
-                                <form method="POST" action="{{ route('ad-absents.confirm', $absent->id) }}">
+                                <form method="POST" action="{{ route('manage.absents.confirm', $absent->id) }}">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="action" value="1">
                                     <button class="dropdown-item" type="submit">Accept</button>
                                 </form>
-                                <form method="POST" action="{{ route('ad-absents.confirm', $absent->id) }}">
+                                <form method="POST" action="{{ route('manage.absents.confirm', $absent->id) }}">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" name="action" value="2">

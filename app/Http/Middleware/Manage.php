@@ -18,7 +18,7 @@ class Manage
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if ((Auth::user()->role) == User::IS_ADMIN) {
+            if (Auth::user()->role == User::IS_ADMIN) {
                 
                 return $next($request);
             } else {

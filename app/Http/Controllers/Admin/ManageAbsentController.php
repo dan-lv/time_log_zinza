@@ -31,7 +31,9 @@ class ManageAbsentController extends Controller
 
     public function create()
     {
-        return view('admin.absent.create');
+        $absent = $this->absentRequestRepository->model();
+
+        return view('admin.absent.create_edit')->with('absent', $absent);
     }
 
     public function store(AbsentByAdminFormRequest $request)
@@ -54,7 +56,7 @@ class ManageAbsentController extends Controller
     {
         $absent = $this->absentRequestRepository->getAbsentById($id);
 
-        return view('admin.absent.edit')->with('absent', $absent);
+        return view('admin.absent.create_edit')->with('absent', $absent);
     }
 
     /**
@@ -85,9 +87,9 @@ class ManageAbsentController extends Controller
         return view('admin.absent.absent_user')->with('absents', $absents);
     }
 
-    public function absentProcessing()
+    public function processingAbsents()
     {
-        $absents = $this->absentRequestRepository->getAbsentsProcessing();
+        $absents = $this->absentRequestRepository->getProcessingAbsents();
 
         return view('admin.absent.index')->with('absents', $absents);
     }

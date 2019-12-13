@@ -10,10 +10,14 @@ class AbsentRepository implements AbsentInterface
 {
     const NUMBER_OF_ITEM = 5;
 
+    public function model() {
+        return new AbsentRequest;
+    }
+
     public function createAbsentRequest($request, $userId) {
         AbsentRequest::create([
-            'time_absent_from' => $request['absent-from'],
-            'time_absent_to' => $request['absent-to'],
+            'time_absent_from' => $request['absent_from'],
+            'time_absent_to' => $request['absent_to'],
             'day' => $request['day'],
             'reason' => $request['reason'],
             'user_id' => $userId,
@@ -43,8 +47,8 @@ class AbsentRepository implements AbsentInterface
         $absent = $this->getAbsentById($id);
 
         $absent->update([
-            'time_absent_from' => $request['absent-from'],
-            'time_absent_to' => $request['absent-to'],
+            'time_absent_from' => $request['absent_from'],
+            'time_absent_to' => $request['absent_to'],
             'day' => $request['day'],
             'reason' => $request['reason'],
         ]);        
@@ -74,8 +78,8 @@ class AbsentRepository implements AbsentInterface
         ]);
     }
 
-    public function getAbsentsProcessing() {
+    public function getProcessingAbsents() {
 
-        return AbsentRequest::where('status', 0)->paginate(self::NUMBER_OF_ITEM);
+        return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_PROCESSING)->paginate(self::NUMBER_OF_ITEM);
     }
 }

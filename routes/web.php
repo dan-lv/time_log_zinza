@@ -31,13 +31,13 @@ Route::group([
     Route::post('/profiles/upload-avatar', 'ProfileController@storeAvatar')->name('profiles.avatar');
 });
 
-Route::group([
-    'prefix' => 'manage',
-    'namespace' => 'Admin',
-    'middleware' => 'manage',
-], function() {
-    Route::resource('ad-absents', 'ManageAbsentController')->except('show');
-    Route::get('ad-absents/user/{userId}', 'ManageAbsentController@absentOfUser')->name('ad-absents.absent_user');
-    Route::get('ad-absents/processing', 'ManageAbsentController@absentProcessing')->name('ad-absents.processing');
-    Route::patch('ad-absents/status/{absent}', 'ManageAbsentController@confirm')->name('ad-absents.confirm');
+Route::namespace('Admin')
+->name('manage.')
+->middleware('manage')
+->prefix('manage')
+->group(function() {
+    Route::resource('absents', 'ManageAbsentController')->except('show');
+    Route::get('absents/user/{userId}', 'ManageAbsentController@absentOfUser')->name('absents.absent_user');
+    Route::get('absents/processing', 'ManageAbsentController@processingAbsents')->name('absents.processing');
+    Route::patch('absents/status/{absent}', 'ManageAbsentController@confirm')->name('absents.confirm');
 });
