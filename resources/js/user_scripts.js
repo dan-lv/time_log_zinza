@@ -29,4 +29,13 @@ $(document).ready(function(){
     $('#birthday').datetimepicker({
         format: FORMAT_DATE
     });
+    $('#check-in-time').datetimepicker({
+        format: FORMAT_TIME
+    });
+    $('#check-out-time').datetimepicker({
+        format: FORMAT_TIME
+    });
+    $('#day-timelog').datetimepicker({
+        format: FORMAT_DATE
+    });
 });

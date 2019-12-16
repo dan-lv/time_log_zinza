@@ -19,7 +19,7 @@
             @yield('content')
         </div> 
 
-        <script src="{{ mix('js/library.js') }}"></script>
+        <script src="{{ mix('js/library.js') }}"></script>    
         <script src="{{ mix('js/user_scripts.js') }}"></script>
         
         @yield('scripts')
