@@ -30,20 +30,18 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show($userId)
     {
-        $userId = $this->userRepository->getCurrentUserId();
         $profile = $this->profileRepository->getProfile($userId);
 
         return view('user.profile')->with('profile', $profile);
     }
 
-    public function store(ProfileFormRequest $request)
+    public function update(ProfileFormRequest $request, $userId)
     {
-        $userId = $this->userRepository->getCurrentUserId();
         $this->profileRepository->updateProfile($request->validated(), $userId);
 
-        return redirect()->route('profiles.index')->with('status', 'Your Profile has been updated');
+        return redirect()->route('profiles.show', $userId)->with('status', 'Your Profile has been updated');
     }
 
     public function storeAvatar(AvatarFormRequest $request)
@@ -51,6 +49,6 @@ class ProfileController extends Controller
         $userId = $this->userRepository->getCurrentUserId();
         $profile = $this->profileRepository->storeImage($request->validated(), $userId);
 
-        return redirect()->route('profiles.index', $userId);
+        return redirect()->route('profiles.show', $userId);
     }
 }

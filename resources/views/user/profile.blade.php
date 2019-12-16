@@ -21,8 +21,9 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="{{ route('profiles.store') }}" class="col-8 form-profile d-flex flex-column justify-content-around">
+        <form method="POST" action="{{ route('profiles.update', $profile->user_id) }}" class="col-8 form-profile d-flex flex-column justify-content-around">
             @csrf
+            @method('PUT')
             <div class="form-group row">
                 <label for="fullname" class="col-sm-2 col-form-label">Full Name</label>
                 <div class="col-sm-8">
