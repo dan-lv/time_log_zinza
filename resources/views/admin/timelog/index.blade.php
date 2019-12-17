@@ -13,8 +13,8 @@
                     <th scope="col">Day</th>
                     <th scope="col">Check In</th>
                     <th scope="col">Check Out</th>
-                    <th scope="col">Name Staff</th>
-                    <th scope="col">User ID</th>
+                    <th scope="col">Staff Name</th>
+                    <th scope="col">Staff ID</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -25,7 +25,7 @@
                     <td>{{ $timeLog->check_in }}</td>
                     <td>{{ $timeLog->check_out }}</td>
                     <td>
-                        <a href="{{ route('manage.timelogs.timelog_user', $timeLog->user_id) }}">
+                        <a href="{{ route('profiles.show', $timeLog->user_id) }}">
                             {{ $timeLog->user->name }}
                         </a> 
                     </td>
