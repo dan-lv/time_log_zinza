@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidTime;
+use App\Rules\ValidDate;
 
 class AbsentFormRequest extends FormRequest
 {
@@ -24,9 +26,9 @@ class AbsentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'absent_from' => 'required|date_format: H:i:s',
-            'absent_to' => 'required|date_format: H:i:s',
-            'day' => 'required|date_format: Y-m-d',
+            'absent_from' => ['required', new ValidTime],
+            'absent_to' => ['required', new ValidTime],
+            'day' => ['required', new ValidDate],
             'reason' => 'required',
         ];
     }
