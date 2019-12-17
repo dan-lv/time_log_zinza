@@ -1,7 +1,9 @@
 @extends('layout')
 @section('content')
 <div class="container">
-    <h4>Name of Staff: {{ $absents->first()->user->name }}</h4>
+    @if (!$absents->isEmpty())
+    <h4 class="text-center pt-2">Name of Staff: {{ $absents->first()->user->name }}</h4>
+    @endif
     <div class="row trans-table">
         <table class="table table-hover">
             <thead class="thead-dark">

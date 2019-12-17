@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\TimeLog;
 use App\Models\Profile;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     const IS_ADMIN = 1;
     const IS_USER = 0;
@@ -21,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role'
     ];
 
     /**

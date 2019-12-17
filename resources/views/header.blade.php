@@ -1,7 +1,7 @@
 <header>
     <div class="container">
         <div class="row">
-            <a href="#" class="col-3 logo">
+            <a href="/" class="col-3 logo">
                 <img src="images/logo3.png">
             </a>
             <ul class="nav col-9 justify-content-end">
@@ -23,7 +23,7 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ route('manage.absents.index') }}">Manage Absent</a>
                                 <a class="dropdown-item" href="{{ route('manage.timelogs.index') }}">Manage Time Logs</a>
-                                <a class="dropdown-item" href="#">Manage User</a>
+                                <a class="dropdown-item" href="{{ route('manage.users.index') }}">Manage User</a>
                             </div>
                         </li>
                     @else

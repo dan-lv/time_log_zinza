@@ -8,6 +8,8 @@ use Auth;
 
 class UserRepository implements UserInterface 
 {
+    const NUMBER_OF_ITEM = 10;
+
     public function getCurrentUserId() {
         return Auth::user()->id;
     }
@@ -17,6 +19,20 @@ class UserRepository implements UserInterface
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    public function getAll() {
+        return User::paginate(self::NUMBER_OF_ITEM);
+    }
+
+    public function deleteById($userId) {
+        User::find($userId)->delete();
+    }
+
+    public function updateRole($request, $userId) {
+        User::find($userId)->update([
+            'role' => $request['role'],
         ]);
     }
 }
