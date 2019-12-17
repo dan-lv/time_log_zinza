@@ -7,4 +7,6 @@ interface TimeLogInterface
     public function setCheckIn($userId);
     public function setCheckOut(object $checkTimeLog);
     public function getTimeLogsByUserId($userId);
+    public function getAll();
+    public function createTimeLog($request);
 }

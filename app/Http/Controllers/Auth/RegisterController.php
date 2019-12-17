@@ -66,7 +66,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = $this->userRepository->createUser($data);    
+        $user = $this->userRepository->createUser($data);
         event(new UserCreated($user));
 
         return $user;

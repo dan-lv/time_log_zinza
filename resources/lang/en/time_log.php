@@ -6,4 +6,6 @@ return [
     'check_in_first' => 'You have to check-in first!',
     'check_out_success' => 'You checked-out successful!',
     'check_out_fail' => 'You checked_out today!',
+    'edit_success' => 'TimeLog edited successful',
+    'create_success' => 'New Time Log created successfully!'
 ];
