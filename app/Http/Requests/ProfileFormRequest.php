@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidDate;
 
 class ProfileFormRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class ProfileFormRequest extends FormRequest
         return [
             'fullname' => 'nullable|string|max:20', 
             'gender' => 'nullable|numeric', 
-            'birthday' => 'nullable|date_format: Y-m-d',
+            'birthday' => ['nullable', new ValidDate],
             'phone' => 'nullable|string|max:11',
             'address' => 'nullable|string|max:200',
             'position' => 'nullable|string|max:10',
