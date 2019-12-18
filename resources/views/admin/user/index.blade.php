@@ -41,13 +41,7 @@
                                     @method('DELETE')
                                     <button class="dropdown-item" type="submit">Delete</button>
                                 </form>
-                                <form method="POST" action="{{ route('manage.users.update', $user->id) }}">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="role" value="{{ 1 -  $user->role }}">
-                                    <button class="dropdown-item" type="submit">Change Role</button>
-                                </form>
-                                <form method="GET" action="{{ route('manage.timelogs.timelog_user', $user->id) }}">
+                                <form method="GET" action="{{ route('manage.user.timelogs', $user->id) }}">
                                     <button class="dropdown-item" type="submit">List TimeLogs</button>
                                 </form>
                                 <form method="GET" action="{{ route('manage.absents.absent_user', $user->id) }}">
