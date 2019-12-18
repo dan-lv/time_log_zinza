@@ -80,13 +80,6 @@ class ManageAbsentController extends Controller
         return back();  
     }
 
-    public function absentOfUser($userId)
-    {
-        $absents = $this->absentRequestRepository->getAbsentByUserId($userId);
-
-        return view('admin.absent.absent_user')->with('absents', $absents);
-    }
-
     public function processingAbsents()
     {
         $absents = $this->absentRequestRepository->getProcessingAbsents();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RoleFormRequest;
 use App\Interfaces\UserInterface;
 
 class ManageUserController extends Controller
@@ -24,13 +23,6 @@ class ManageUserController extends Controller
         $users = $this->userRepository->getAll();
 
         return view('admin.user.index')->with('users', $users);
-    }
-
-    public function update(RoleFormRequest $request, $userId)
-    {
-        $this->userRepository->updateRole($request->validated(), $userId);
-
-        return back();
     }
 
     public function destroy($userId)

@@ -30,6 +30,7 @@ class ProfileFormRequest extends FormRequest
             'phone' => 'nullable|string|max:11',
             'address' => 'nullable|string|max:200',
             'position' => 'nullable|string|max:10',
+            'role' => 'required|in:0, 1',
         ];
     }
 }

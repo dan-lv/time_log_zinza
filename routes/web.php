@@ -37,10 +37,10 @@ Route::namespace('Admin')
 ->prefix('manage')
 ->group(function() {
     Route::resource('absents', 'ManageAbsentController')->except('show');
-    Route::get('absents/user/{userId}', 'ManageAbsentController@absentOfUser')->name('absents.absent_user');
+    Route::resource('users.absents', 'UserAbsentController')->only('index');
     Route::get('absents/processing', 'ManageAbsentController@processingAbsents')->name('absents.processing');
     Route::patch('absents/status/{absent}', 'ManageAbsentController@confirm')->name('absents.confirm');
     Route::resource('timelogs', 'ManageTimeLogController')->except(['destroy', 'show']);
-    Route::get('timelogs/user/{userId}', 'ManageTimeLogController@timeLogOfUser')->name('user.timelogs');
-    Route::resource('users', 'ManageUserController')->only(['index', 'update', 'destroy']);
+    Route::resource('users.timelogs', 'UserTimeLogController')->only('index');
+    Route::resource('users', 'ManageUserController')->only(['index', 'destroy']);
 });

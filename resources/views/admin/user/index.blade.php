@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     @include('status')
-    <div class="row trans-table">
+    <div class="row trans-table mt-3">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -41,10 +41,10 @@
                                     @method('DELETE')
                                     <button class="dropdown-item" type="submit">Delete</button>
                                 </form>
-                                <form method="GET" action="{{ route('manage.user.timelogs', $user->id) }}">
+                                <form method="GET" action="{{ route('manage.users.timelogs.index', $user->id) }}">
                                     <button class="dropdown-item" type="submit">List TimeLogs</button>
                                 </form>
-                                <form method="GET" action="{{ route('manage.absents.absent_user', $user->id) }}">
+                                <form method="GET" action="{{ route('manage.users.absents.index', $user->id) }}">
                                     <button class="dropdown-item" type="submit">List Absents</button>
                                 </form>
                             </div>
