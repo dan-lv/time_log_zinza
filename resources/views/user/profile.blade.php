@@ -14,7 +14,7 @@
                         @csrf
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="customFile" name="image">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <label class="custom-file-label overflow-hidden" for="customFile">Choose file</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Update Avatar</button>
                     </form>                 
