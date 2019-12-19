@@ -20,7 +20,6 @@ class ProfileRepository implements ProfileInterface
             'phone_number' => $request['phone'],
             'address' => $request['address'],
             'position' => $request['position'],
-            'role' => $request['role'],
         ]);
     }
 

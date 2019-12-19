@@ -73,25 +73,18 @@
                 </div>
             </div>
 
-            @if (Auth::user()->role == 1)
+            @if (Auth::user()->role == App\Models\User::IS_ADMIN)
             <div class="form-group row">
                 <label for="role" class="col-sm-2 col-form-label">Role</label>
                 <div class="col-sm-8">
                     <select class="custom-select" id="role" name="role">
-                        <option value="0" @if (old('role', $profile->user->role) == 0) selected @endif>
+                        <option value="{{ App\Models\User::IS_USER }}" @if (old('role', $profile->user->role) == 0) selected @endif>
                             Staff
                         </option>
-                        <option value="1" @if (old('role', $profile->user->role) == 1) selected @endif>
+                        <option value="{{ App\Models\User::IS_ADMIN }}" @if (old('role', $profile->user->role) == 1) selected @endif>
                             Admin
                         </option>
                     </select>
-                </div>
-            </div>
-            @else
-            <div class="form-group row d-none">
-                <label for="role" class="col-sm-2 col-form-label">Role</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="role" name="role" value="{{ $profile->user->role }}">
                 </div>
             </div>
             @endif

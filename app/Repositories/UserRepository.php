@@ -29,4 +29,16 @@ class UserRepository implements UserInterface
     public function deleteById($userId) {
         User::find($userId)->delete();
     }
+
+    public function updateRole($request, $userId) {
+        $user = User::find($userId);
+        
+        $user->update([
+            'role' => $request['role'],
+        ]);
+    }
+
+    public function getCurrentUserRole() {
+        return Auth::user()->role;
+    }
 }
