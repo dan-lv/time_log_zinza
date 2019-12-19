@@ -16,8 +16,8 @@
                             <input type="file" class="custom-file-input" id="customFile" name="image">
                             <label class="custom-file-label overflow-hidden" for="customFile">Choose file</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Avatar</button>
-                    </form>                 
+                        <button type="submit" class="btn btn-primary mt-2">Update Avatar</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -35,21 +35,11 @@
                 <label for="gender" class="col-sm-2 col-form-label">Gender</label>
                 <div class="col-sm-8">
                     <select class="custom-select" id="gender" name="gender">
-                        <option value="{{ old('gender', $profile->gender) }}" selected="">
-                            @if (old('gender', $profile->gender) == 0)
+                        <option value="0" @if (old('gender', $profile->gender) == 0) selected @endif>
                             Male
-                            @endif
-                            @if (old('gender', $profile->gender) == 1)
-                            Female
-                            @endif
                         </option>
-                        <option value="{{ 1 - old('gender', $profile->gender) }}">
-                            @if ((1 - old('gender', $profile->gender)) == 0)
-                            Male
-                            @endif
-                            @if ((1 - old('gender', $profile->gender)) == 1)
+                        <option value="1" @if (old('gender', $profile->gender) == 1) selected @endif>
                             Female
-                            @endif
                         </option>
                     </select>
                 </div>
@@ -82,13 +72,30 @@
                     <input type="text" class="form-control" id="position" name="position" placeholder="Your Position is empty" value="{{ old('position', $profile->position) }}">
                 </div>
             </div>
+
+            @if (Auth::user()->role == App\Models\User::IS_ADMIN)
+            <div class="form-group row">
+                <label for="role" class="col-sm-2 col-form-label">Role</label>
+                <div class="col-sm-8">
+                    <select class="custom-select" id="role" name="role">
+                        <option value="{{ App\Models\User::IS_USER }}" @if (old('role', $profile->user->role) == 0) selected @endif>
+                            Staff
+                        </option>
+                        <option value="{{ App\Models\User::IS_ADMIN }}" @if (old('role', $profile->user->role) == 1) selected @endif>
+                            Admin
+                        </option>
+                    </select>
+                </div>
+            </div>
+            @endif
+
             <div class="form-group row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-8">
                     <button class="btn btn-primary" type="submit">Save Changes</button>
                 </div>
             </div>
-        </form>       
+        </form>    
     </div>  
 </div>
 @endsection

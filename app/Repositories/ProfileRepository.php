@@ -28,7 +28,6 @@ class ProfileRepository implements ProfileInterface
         $nameImage = $image->getClientOriginalName();
         $image->move('images', $nameImage);
         $profile = Profile::where('user_id', $userId)->first();
-            
         $profile->image = $nameImage;
         $profile->save();
 

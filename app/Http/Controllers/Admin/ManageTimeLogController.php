@@ -83,6 +83,6 @@ class ManageTimeLogController extends Controller
     {
         $timeLogs = $this->timeLogRepository->getTimeLogsByUserId($userId);
 
-        return view('admin.timelog.time_log_user')->with('timeLogs', $timeLogs);
+        return view('admin.timelog.timelog_user')->with('timeLogs', $timeLogs);
     }
 }

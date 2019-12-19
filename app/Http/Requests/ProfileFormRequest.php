@@ -24,12 +24,13 @@ class ProfileFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname' => 'nullable|string|max:20', 
-            'gender' => 'nullable|numeric', 
+            'fullname' => 'nullable|string|max:20',
+            'gender' => 'nullable|numeric',
             'birthday' => 'nullable|date_format: Y-m-d',
             'phone' => 'nullable|string|max:11',
             'address' => 'nullable|string|max:200',
             'position' => 'nullable|string|max:10',
+            'role' => 'in:0, 1',
         ];
     }
 }

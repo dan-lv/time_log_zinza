@@ -27,7 +27,7 @@ Route::group([
     Route::resource('check-outs', 'CheckOutController')->only('store');
     Route::resource('absents', 'AbsentController')->only(['index', 'create', 'store']);
     Route::resource('timelogs', 'TimeLogController')->only('index');
-    Route::resource('profiles', 'ProfileController')->only('show', 'update')->middleware('authorize.profile');
+    Route::resource('profiles', 'ProfileController')->only(['show', 'update'])->middleware('authorize.profile');
     Route::post('/profiles/upload-avatar', 'ProfileController@storeAvatar')->name('profiles.avatar');
 });
 
@@ -37,9 +37,10 @@ Route::namespace('Admin')
 ->prefix('manage')
 ->group(function() {
     Route::resource('absents', 'ManageAbsentController')->except('show');
-    Route::get('absents/user/{userId}', 'ManageAbsentController@absentOfUser')->name('absents.absent_user');
+    Route::resource('users.absents', 'UserAbsentController')->only('index');
     Route::get('absents/processing', 'ManageAbsentController@processingAbsents')->name('absents.processing');
     Route::patch('absents/status/{absent}', 'ManageAbsentController@confirm')->name('absents.confirm');
-    Route::resource('timelogs', 'ManageTimeLogController')->except('destroy', 'show');
-    Route::get('timelogs/user/{userId}', 'ManageTimeLogController@timeLogOfUser')->name('timelogs.timelog_user');
+    Route::resource('timelogs', 'ManageTimeLogController')->except(['destroy', 'show']);
+    Route::resource('users.timelogs', 'UserTimeLogController')->only('index');
+    Route::resource('users', 'ManageUserController')->only(['index', 'destroy']);
 });
