@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -23,6 +19,9 @@ Route::group([
     'namespace' => 'User',
     'middleware' => 'auth',
 ], function() {
+    Route::get('/', function () {
+        return view('user.home');
+    });
     Route::resource('check-ins', 'CheckInController')->only('store');
     Route::resource('check-outs', 'CheckOutController')->only('store');
     Route::resource('absents', 'AbsentController')->only(['index', 'create', 'store']);

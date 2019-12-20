@@ -31,7 +31,8 @@
                     @endif
                 <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Logout</a></li>
                 @else
-                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 @endif
             </ul>
         </div>
