@@ -65,12 +65,14 @@ class TimeLogRepository implements TimeLogInterface
     }
 
     public function updateTimeLog($request, $id) {       
-        $absent = $this->getTimeLogById($id);
+        $timeLog = $this->getTimeLogById($id);
 
-        $absent->update([
+        $timeLog->update([
             'check_in' => $request['check_in_time'],
             'check_out' => $request['check_out_time'],
             'day' => $request['day'],
-        ]);        
+        ]);
+
+        return $timeLog;    
     }
 }

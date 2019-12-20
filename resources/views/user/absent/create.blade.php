@@ -29,7 +29,7 @@
 
             <div class="d-flex justify-content-around">
                 <button type="submit" class="btn btn-secondary"> Send </button>
-                <button type="reset" class="btn btn-secondary"> Cancel </button>
+                <a class="btn btn-secondary" href="/" role="button"> Cancel </a>
             </div>     
         </form>
     </div>

@@ -74,9 +74,10 @@ class ManageTimeLogController extends Controller
      */
     public function update(TimeLogFormRequest $request, $id)
     {
-        $this->timeLogRepository->updateTimeLog($request->validated(), $id);
+        $timeLog = $this->timeLogRepository->updateTimeLog($request->validated(), $id);
+        $request->session()->now('status', __('time_log.edit_success'));
 
-        return back()->with('status', __('time_log.edit_success'));
+        return view('admin.timelog.create_edit')->with('timeLog', $timeLog);
     }
 
     public function timeLogOfUser($userId)

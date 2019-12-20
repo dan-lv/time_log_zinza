@@ -25,7 +25,11 @@
             <div class="form-group">
                 <label for="reason">Reason:</label>
                 <textarea class="form-control" rows="3" id="reason" name="reason" readonly="">{{ $absent->reason }}</textarea>
-            </div>     
+            </div>
+
+            <div class="d-flex justify-content-around">
+                <a class="btn btn-secondary" href="{{ route('manage.absents.create') }}" role="button"> Return </a>
+            </div>    
         </div>
     </div>
 </div>
