@@ -17,7 +17,7 @@
         </div>   
     </div>
     
-    <div class="row trans-table">
+    <div class="row mt-2">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -50,7 +50,7 @@
                     <td>Processing</td>
                     @endswitch
                     <td>
-                        <a href="{{ route('manage.absents.absent_user', $absent->user_id) }}">
+                        <a href="{{ route('manage.users.absents.index', $absent->user_id) }}">
                             {{ $absent->user->name }}
                         </a>
                     </td>

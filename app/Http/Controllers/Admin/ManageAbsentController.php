@@ -38,12 +38,10 @@ class ManageAbsentController extends Controller
 
     public function store(AbsentByAdminFormRequest $request)
     {
-        $absent = $this->absentRequestRepository->createAbsentByAdmin($request->validated()); 
-    
-        return view('admin.absent.show')->with([
-            'status' => __('absent.create_success'),
-            'absent' => $absent,      
-        ]);
+        $absent = $this->absentRequestRepository->createAbsentByAdmin($request->validated());
+        $request->session()->now('status', __('absent.create_success'));
+
+        return view('admin.absent.show')->with('absent', $absent);
     }
 
     /**
