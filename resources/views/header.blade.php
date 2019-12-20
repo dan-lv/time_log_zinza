@@ -29,7 +29,12 @@
                     @else
                         <li class="nav-item"><a class="nav-link" href="#">Welcome [ {{ Auth::user()->name }} ]</a></li>
                     @endif
-                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Logout</a></li>
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="nav-link bg-transparent border-0 text-white">Logout</button>
+                    </form>
+                </li>
                 @else
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
