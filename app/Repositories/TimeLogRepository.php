@@ -64,13 +64,15 @@ class TimeLogRepository implements TimeLogInterface
         return TimeLog::where('id', $id)->first();
     }
 
-    public function updateTimeLog($request, $id) {       
-        $absent = $this->getTimeLogById($id);
+    public function updateTimeLog($request, $id) {
+        $timeLog = $this->getTimeLogById($id);
 
-        $absent->update([
+        $timeLog->update([
             'check_in' => $request['check_in_time'],
             'check_out' => $request['check_out_time'],
             'day' => $request['day'],
-        ]);        
+        ]);
+
+        return $timeLog;
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\TimeLog;
 use App\Models\Profile;
+use App\Models\AbsentRequest;
 
 class User extends Authenticatable
 {
@@ -49,8 +50,13 @@ class User extends Authenticatable
         return $this->hasMany(TimeLog::class, 'user_id', 'id');
     }
 
-    public function profiles()
+    public function profile()
     {
         return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
+
+    public function absents()
+    {
+        return $this->hasMany(AbsentRequest::class, 'user_id', 'id');
     }
 }

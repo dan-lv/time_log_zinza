@@ -6,7 +6,7 @@
             <button class="btn btn-secondary">Create Time Log</button>
         </form>
     </div>
-    <div class="row trans-table">
+    <div class="row mt-2">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
