@@ -82,4 +82,14 @@ class AbsentRepository implements AbsentInterface
 
         return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_PROCESSING)->paginate(self::NUMBER_OF_ITEM);
     }
+
+    public function getAcceptedAbsentsByUserId($userId) {
+
+        return AbsentRequest::where('user_id', $userId)->where('status', AbsentRequest::STATUS_ACCEPTED)->get();
+    }
+
+    public function getAllAcceptedAbsents() {
+
+        return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_ACCEPTED)->get();
+    }
 }

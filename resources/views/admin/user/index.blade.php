@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     @include('status')
-    <div class="row trans-table mt-3">
+    <div class="row mt-3">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>

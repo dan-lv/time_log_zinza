@@ -42,10 +42,12 @@ a.nav-link {
     }
 }
 
-.btn-modify {
-    border: {
-        style: solid;
-        color: white;
+.btn {
+    &-modify {
+        border: {
+            style: solid;
+            color: white;
+        }
     }
 }
 

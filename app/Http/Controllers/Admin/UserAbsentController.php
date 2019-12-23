@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\AbsentInterface;
+use App\Exports\UserAbsentExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserAbsentController extends Controller
 {
@@ -23,5 +25,12 @@ class UserAbsentController extends Controller
         $absents = $this->absentRequestRepository->getAbsentByUserId($userId);
 
         return view('admin.absent.absent_user')->with('absents', $absents);
+    }
+
+    public function export($userId)
+    {
+        $absents = $this->absentRequestRepository->getAcceptedAbsentsByUserId($userId);
+
+        return Excel::download(new UserAbsentExport($absents), 'Absents.xlsx');
     }
 }

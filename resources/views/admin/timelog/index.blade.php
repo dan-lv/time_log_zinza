@@ -1,7 +1,10 @@
 @extends('layout')
 @section('content')
 <div class="container">
-    <div class="row justify-content-end pt-2">
+    <div class="row justify-content-between mt-2">
+        <form method="GET" action="{{ route('manage.timelogs.export') }}">
+            <button class="btn btn-secondary">Export Excel</button>
+        </form>
         <form method="GET" action="{{ route('manage.timelogs.create') }}">
             <button class="btn btn-secondary">Create Time Log</button>
         </form>

@@ -26,7 +26,7 @@ class TimeLogRepository implements TimeLogInterface
         return $checkTimeLog;
     }
 
-    public function setCheckIn($userId) { 
+    public function setCheckIn($userId) {
         
         TimeLog::create([
             'check_in' => $this->getTime()->toTimeString(),
@@ -74,5 +74,13 @@ class TimeLogRepository implements TimeLogInterface
         ]);
 
         return $timeLog;
+    }
+
+    public function getAllByUserId($userId) {
+        return TimeLog::where('user_id', $userId)->get();
+    }
+
+    public function getAllToExport() {
+        return TimeLog::with('user')->get();
     }
 }

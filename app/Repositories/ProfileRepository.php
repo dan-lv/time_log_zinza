@@ -14,8 +14,8 @@ class ProfileRepository implements ProfileInterface
         $profile = Profile::where('user_id', $userId)->first();
         
         $profile->update([
-            'fullname' => $request['fullname'], 
-            'gender' => $request['gender'], 
+            'fullname' => $request['fullname'],
+            'gender' => $request['gender'],
             'birthday' => $request['birthday'],
             'phone_number' => $request['phone'],
             'address' => $request['address'],

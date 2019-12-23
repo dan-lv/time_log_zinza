@@ -4,7 +4,16 @@
     @if (!$absents->isEmpty())
     <h4 class="text-center pt-2">Name of Staff: {{ $absents->first()->user->name }}</h4>
     @endif
-    <div class="row trans-table">
+
+    @if (!$absents->isEmpty())
+    <div class="row justify-content-between mt-2">
+        <form method="GET" action="{{ route('manage.users.absents.export', $absents->first()->user_id) }}">
+            <button class="btn btn-secondary">Export Excel</button>
+        </form>
+    </div>
+    @endif
+
+    <div class="row mt-2">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>

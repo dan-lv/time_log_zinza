@@ -1,6 +1,11 @@
 @extends('layout')
 @section('content')
 <div class="container">
+    <div class="row justify-content-between mt-2">
+        <form method="GET" action="{{ route('absents.export') }}">
+            <button class="btn btn-secondary mt-2" type="submit">Export Excel</button>
+        </form>
+    </div>
     <div class="row mt-3">
         <table class="table table-hover">
             <thead class="thead-dark">

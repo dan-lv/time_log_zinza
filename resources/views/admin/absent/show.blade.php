@@ -6,7 +6,7 @@
         <h3>Name of Staff: {{ $absent->user->name }}</h3>
     </div>
     <div class="container pt-3">
-        <div class="form-absent container">    
+        <div class="form-absent container">
             <div class="form-group">
                 <label for="time-absent-from">Absent from:</label>
                 <input type="text" class="form-control timepicker" id="time-absent-from" value="{{ $absent->time_absent_from }}" readonly="">
@@ -29,7 +29,7 @@
 
             <div class="d-flex justify-content-around">
                 <a class="btn btn-secondary" href="{{ route('manage.absents.create') }}" role="button"> Return </a>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

@@ -46,7 +46,7 @@
                 <button type="submit" class="btn btn-secondary"> Save </button>
                 @endif
                 <a class="btn btn-secondary" href="{{ route('manage.absents.index') }}" role="button"> Cancel </a>
-            </div>     
+            </div>
         </form>
     </div>
 </div>
