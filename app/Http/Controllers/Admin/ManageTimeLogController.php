@@ -7,6 +7,7 @@ use App\Http\Requests\TimeLogFormRequest;
 use App\Interfaces\TimeLogInterface;
 use App\Exports\ManageTimeLogExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\FilterExportFormRequest;
 
 class ManageTimeLogController extends Controller
 {
@@ -89,9 +90,9 @@ class ManageTimeLogController extends Controller
         return view('admin.timelog.timelog_user')->with('timeLogs', $timeLogs);
     }
 
-    public function export()
+    public function export(FilterExportFormRequest $request)
     {
-        $timeLogs = $this->timeLogRepository->getAllToExport();
+        $timeLogs = $this->timeLogRepository->getAllToExport($request->validated());
 
         return Excel::download(new ManageTimeLogExport($timeLogs), 'TimeLogs.xlsx');
     }

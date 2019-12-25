@@ -5,8 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Interfaces\TimeLogInterface;
 use App\Interfaces\UserInterface;
-use App\Exports\TimeLogUserExport;
+use App\Exports\UserTimeLogExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\FilterExportFormRequest;
 
 class TimeLogController extends Controller
 {
@@ -27,11 +28,11 @@ class TimeLogController extends Controller
         return view('user.timelog.index')->with('timeLogs', $timeLogs);
     }
 
-    public function export()
+    public function export(FilterExportFormRequest $request)
     {
         $userId = $this->userRepository->getCurrentUserId();
-        $timeLogs = $this->timeLogRepository->getAllByUserId($userId);
+        $timeLogs = $this->timeLogRepository->getAllToExportByUserId($request->validated(), $userId);
 
-        return Excel::download(new TimeLogUserExport($timeLogs), 'TimeLogs.xlsx');
+        return Excel::download(new UserTimeLogExport($timeLogs), 'TimeLogs.xlsx');
     }
 }

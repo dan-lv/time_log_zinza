@@ -1,11 +1,16 @@
 @extends('layout')
 @section('content')
+
+@include('message_validation')
 <div class="container">
     <div class="row justify-content-between mt-2">
-        <form method="GET" action="{{ route('timelogs.export') }}">
-            <button class="btn btn-secondary mt-2" type="submit">Export Excel</button>
-        </form>
+        <button class="btn btn-secondary mt-2" data-toggle="modal" data-target="#myModal">Export Excel</button>
     </div>
+
+    <!-- The Modal -->
+    <form method="GET" action="{{ route('timelogs.export') }}">
+        @include('filter_export')
+    </form>
     <div class="row mt-2">
         <table class="table table-hover">
             <thead class="thead-dark">

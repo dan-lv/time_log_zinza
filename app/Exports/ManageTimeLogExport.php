@@ -4,8 +4,9 @@ namespace App\Exports;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ManageTimeLogExport implements FromView
+class ManageTimeLogExport implements FromView, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection

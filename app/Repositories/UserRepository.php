@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Auth;
 
-class UserRepository implements UserInterface 
+class UserRepository implements UserInterface
 {
     const NUMBER_OF_ITEM = 10;
 
