@@ -1,10 +1,21 @@
 @extends('layout')
 @section('content')
+
+@include('message_validation')
 <div class="container">
     @if (!$absents->isEmpty())
     <h4 class="text-center pt-2">Name of Staff: {{ $absents->first()->user->name }}</h4>
+
+    <div class="row justify-content-between mt-2">
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#filter_modal">Export Excel</button>
+    </div>
     @endif
-    <div class="row trans-table">
+
+    <!-- The Modal -->
+    <form method="GET" action="{{ route('manage.users.absents.export', $absents->first()->user_id) }}">
+        @include('filter_export')
+    </form>
+    <div class="row mt-2">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>

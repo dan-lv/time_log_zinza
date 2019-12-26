@@ -4,7 +4,7 @@
     @if (!$timeLogs->isEmpty())
     <h4 class="text-center pt-2">Name of Staff: {{ $timeLogs->first()->user->name }}</h4>
     @endif
-    <div class="row trans-table">
+    <div class="row mt-2">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>

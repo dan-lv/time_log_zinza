@@ -5,9 +5,12 @@ use Illuminate\Http\Request;
 use App\Interfaces\AbsentInterface;
 use App\Models\AbsentRequest;
 use Carbon\Carbon;
+use App\Traits\Operators;
 
-class AbsentRepository implements AbsentInterface 
+class AbsentRepository implements AbsentInterface
 {
+    use Operators;
+
     const NUMBER_OF_ITEM = 5;
 
     public function model() {
@@ -81,5 +84,21 @@ class AbsentRepository implements AbsentInterface
     public function getProcessingAbsents() {
 
         return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_PROCESSING)->paginate(self::NUMBER_OF_ITEM);
+    }
+
+    public function getAcceptedAbsentsByUserId($request, $userId) {
+
+        return AbsentRequest::where('user_id', $userId)
+        ->where('status', AbsentRequest::STATUS_ACCEPTED)
+        ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
+        ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])->get();
+    }
+
+    public function getAcceptedAbsentsByFilter($request) {
+
+        return AbsentRequest::with('user')
+        ->where('status', AbsentRequest::STATUS_ACCEPTED)
+        ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
+        ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])->get();
     }
 }

@@ -6,8 +6,8 @@ use App\Models\User;
 class Profile extends BaseModel
 {
     protected $fillable = [
-        'fullname', 
-        'gender', 
+        'fullname',
+        'gender',
         'birthday',
         'phone_number',
         'address',

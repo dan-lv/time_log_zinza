@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="cover-image"> 
+<div class="cover-image">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-5">

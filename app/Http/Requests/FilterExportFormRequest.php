@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\ValidDate;
 
-class ProfileFormRequest extends FormRequest
+class FilterExportFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,10 @@ class ProfileFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname' => 'nullable|string|max:20',
-            'gender' => 'nullable|numeric',
-            'birthday' => ['nullable', new ValidDate],
-            'phone' => 'nullable|string|max:11',
-            'address' => 'nullable|string|max:200',
-            'position' => 'nullable|string|max:10',
-            'role' => 'in:0, 1',
+            'month' => 'required|in: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12',
+            'operator_month' => 'required|in: 0, 1, 2, 3, 4',
+            'operator_year' => 'required|in: 0, 1, 2, 3, 4',
+            'year' => 'required|regex: /^[0-9]{4}$/',
         ];
     }
 }

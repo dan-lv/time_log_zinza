@@ -4,9 +4,12 @@ namespace App\Repositories;
 use App\Interfaces\TimeLogInterface;
 use App\Models\TimeLog;
 use Carbon\Carbon;
+use App\Traits\Operators;
 
-class TimeLogRepository implements TimeLogInterface 
+class TimeLogRepository implements TimeLogInterface
 {
+    use Operators;
+
     const NUMBER_OF_ITEM = 10;
 
     private function getTime()
@@ -26,7 +29,7 @@ class TimeLogRepository implements TimeLogInterface
         return $checkTimeLog;
     }
 
-    public function setCheckIn($userId) { 
+    public function setCheckIn($userId) {
         
         TimeLog::create([
             'check_in' => $this->getTime()->toTimeString(),
@@ -74,5 +77,19 @@ class TimeLogRepository implements TimeLogInterface
         ]);
 
         return $timeLog;
+    }
+
+    public function getAllToExportByUserId($request, $userId) {
+        return TimeLog::where('user_id', $userId)
+        ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
+        ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])
+        ->get();
+    }
+
+    public function getAllToExport($request) {
+        return TimeLog::with('user')
+        ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
+        ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])
+        ->get();
     }
 }

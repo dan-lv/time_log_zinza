@@ -3,20 +3,20 @@
 
 @include('message_validation')
 <div class="container">
-    <div class="row">
-        <div class="col-5"></div>
-        <div class="col-5">
-            <form method="GET" action="{{ route('manage.absents.processing') }}">
-                <button class="btn btn-secondary mt-2" type="submit">Absent Processing</button>
-            </form>
-        </div>
-        <div class="col-2">
-            <form method="GET" action="{{ route('manage.absents.create') }}">
-                <button class="btn btn-secondary mt-2" type="submit">Create Absent</button>
-            </form>
-        </div>   
+    <div class="row justify-content-between mt-2">
+        <button class="btn btn-secondary mt-2" data-toggle="modal" data-target="#filter_modal">Export Excel</button>
+        <form method="GET" action="{{ route('manage.absents.processing') }}">
+            <button class="btn btn-secondary mt-2" type="submit">Absent Processing</button>
+        </form>
+        <form method="GET" action="{{ route('manage.absents.create') }}">
+            <button class="btn btn-secondary mt-2" type="submit">Create Absent</button>
+        </form>
     </div>
-    
+
+    <!-- The Modal -->
+    <form method="GET" action="{{ route('manage.absents.export') }}">
+        @include('filter_export')
+    </form>
     <div class="row mt-2">
         <table class="table table-hover">
             <thead class="thead-dark">

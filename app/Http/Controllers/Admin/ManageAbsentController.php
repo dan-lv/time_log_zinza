@@ -7,6 +7,9 @@ use App\Interfaces\AbsentInterface;
 use App\Http\Requests\AbsentFormRequest;
 use App\Http\Requests\AbsentByAdminFormRequest;
 use App\Http\Requests\ConfirmAbsentFormRequest;
+use App\Exports\ManageAbsentExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\FilterExportFormRequest;
 
 class ManageAbsentController extends Controller
 {
@@ -75,7 +78,7 @@ class ManageAbsentController extends Controller
     {
         $this->absentRequestRepository->confirmAbsent($request->validated(), $id);
 
-        return back();  
+        return back();
     }
 
     public function processingAbsents()
@@ -83,5 +86,12 @@ class ManageAbsentController extends Controller
         $absents = $this->absentRequestRepository->getProcessingAbsents();
 
         return view('admin.absent.index')->with('absents', $absents);
+    }
+
+    public function export(FilterExportFormRequest $request)
+    {
+        $absents = $this->absentRequestRepository->getAcceptedAbsentsByFilter($request->validated());
+
+        return Excel::download(new ManageAbsentExport($absents), 'Absents.xlsx');
     }
 }

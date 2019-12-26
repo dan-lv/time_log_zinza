@@ -95,8 +95,8 @@
                     <button class="btn btn-primary" type="submit">Save Changes</button>
                 </div>
             </div>
-        </form>    
-    </div>  
+        </form>
+    </div>
 </div>
 @endsection
 
