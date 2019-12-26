@@ -7,7 +7,7 @@
     <h4 class="text-center pt-2">Name of Staff: {{ $absents->first()->user->name }}</h4>
 
     <div class="row justify-content-between mt-2">
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Export Excel</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#filter_modal">Export Excel</button>
     </div>
     @endif
 

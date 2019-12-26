@@ -4,7 +4,7 @@
 @include('message_validation')
 <div class="container">
     <div class="row justify-content-between mt-2">
-        <button class="btn btn-secondary mt-2" data-toggle="modal" data-target="#myModal">Export Excel</button>
+        <button class="btn btn-secondary mt-2" data-toggle="modal" data-target="#filter_modal">Export Excel</button>
         <form method="GET" action="{{ route('manage.absents.processing') }}">
             <button class="btn btn-secondary mt-2" type="submit">Absent Processing</button>
         </form>

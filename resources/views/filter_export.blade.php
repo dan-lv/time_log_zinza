@@ -1,4 +1,4 @@
-<div class="modal" id="myModal">
+<div class="modal" id="filter_modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
