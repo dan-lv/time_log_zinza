@@ -64,6 +64,8 @@ class AbsentRepository implements AbsentInterface
         $absent->update([
             'status' => $request['action'],
         ]);
+
+        return $absent;
     }
 
     public function getAbsentById($id) {
