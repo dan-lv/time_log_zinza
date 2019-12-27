@@ -5,8 +5,9 @@ namespace App\Listeners;
 use App\Events\AbsentReplied;
 use Mail;
 use App\Mail\AbsentRepliedMail;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendEmailNotification
+class SendEmailNotification implements ShouldQueue
 {
     /**
      * Handle the event.
