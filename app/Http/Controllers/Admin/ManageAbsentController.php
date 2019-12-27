@@ -10,7 +10,8 @@ use App\Http\Requests\ConfirmAbsentFormRequest;
 use App\Exports\ManageAbsentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
-use App\Events\ReplyAbsentRequest;
+use App\Events\AbsentReplied;
+use App\Interfaces\UserInterface;
 
 class ManageAbsentController extends Controller
 {
@@ -20,10 +21,12 @@ class ManageAbsentController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $absentRequestRepository;
+    private $userRepository;
 
-    public function __construct(AbsentInterface $absentRequestRepository)
+    public function __construct(AbsentInterface $absentRequestRepository, UserInterface $userRepository)
     {
         $this->absentRequestRepository = $absentRequestRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function index()
@@ -78,7 +81,9 @@ class ManageAbsentController extends Controller
     public function confirm(ConfirmAbsentFormRequest $request, $id)
     {
         $absent = $this->absentRequestRepository->confirmAbsent($request->validated(), $id);
-        event(new ReplyAbsentRequest($absent));
+        $user = $this->userRepository->getUserById($absent->user_id);
+
+        event(new AbsentReplied($absent, $user));
 
         return back();
     }
