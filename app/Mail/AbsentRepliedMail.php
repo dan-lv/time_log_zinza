@@ -34,6 +34,7 @@ class AbsentRepliedMail extends Mailable
     {
         return $this->from(env('MAIL_USERNAME'),  self::NAME)
                     ->subject('Absent Request Notification')
+                    ->to($this->absent->user->email, $this->absent->user->name)
                     ->view('emails.absentConfirm')
                     ->with([
                         'name' => $this->absent->user->name,

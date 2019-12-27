@@ -41,8 +41,4 @@ class UserRepository implements UserInterface
     public function getCurrentUserRole() {
         return Auth::user()->role;
     }
-
-    public function getUserById($id) {
-        return User::find($id);
-    }
 }

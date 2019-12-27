@@ -16,6 +16,6 @@ class SendEmailNotification
      */
     public function handle(AbsentReplied $event)
     {
-        Mail::to($event->user)->send(new AbsentRepliedMail($event->absent));
+        Mail::send(new AbsentRepliedMail($event->absent));
     }
 }
