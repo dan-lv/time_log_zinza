@@ -47,4 +47,5 @@ Route::namespace('Admin')
     Route::resource('users', 'ManageUserController')->only(['index', 'destroy']);
     Route::get('users/{userId}/absents/export', 'UserAbsentController@export')->name('users.absents.export');
     Route::get('absents/export', 'ManageAbsentController@export')->name('absents.export');
+    Route::resource('log-profiles', 'LogProfileController')->only('index');
 });

@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileFormRequest;
 use App\Interfaces\ProfileInterface;
 use App\Interfaces\UserInterface;
 use App\Models\User;
+use App\Events\ProfileUpdated;
 
 class ProfileController extends Controller
 {
@@ -42,19 +43,36 @@ class ProfileController extends Controller
     {
         $currentUserRole = $this->userRepository->getCurrentUserRole();
 
-        $this->profileRepository->updateProfile($request->validated(), $userId);
+        // Get different field to log profile changes
+        $profileBeforeUpdate = $this->profileRepository->getProfile($userId);
+        $fieldDiff = $this->profileRepository->getFieldDiff($request->validated(), $profileBeforeUpdate);
+
+        $profileUpdated = $this->profileRepository->updateProfile($request->validated(), $userId);
 
         if ($currentUserRole == User::IS_ADMIN) {
             $this->userRepository->updateRole($request->validated(), $userId);
         }
-        
+
+        if (!empty($fieldDiff)) {
+            event(new ProfileUpdated($profileUpdated, $fieldDiff));
+        }
+
         return redirect()->route('profiles.show', $userId)->with('status', 'Your Profile has been updated');
     }
 
     public function storeAvatar(AvatarFormRequest $request)
     {
         $userId = $this->userRepository->getCurrentUserId();
-        $profile = $this->profileRepository->storeImage($request->validated(), $userId);
+
+        // Get different field to log profile changes
+        $profileBeforeUpdate = $this->profileRepository->getProfile($userId);
+        $fieldDiff = $this->profileRepository->getFieldDiff($request->validated(), $profileBeforeUpdate);
+
+        $profileUpdated = $this->profileRepository->storeImage($request->validated(), $userId);
+
+        if (!empty($fieldDiff)) {
+            event(new ProfileUpdated($profileUpdated, $fieldDiff));
+        }
 
         return redirect()->route('profiles.show', $userId);
     }
