@@ -55,7 +55,7 @@
             <div class="form-group row">
                 <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Phone is empty" value="{{ old('phone', $profile->phone_number) }}">
+                    <input type="text" class="form-control" id="phone" name="phone_number" placeholder="Your Phone is empty" value="{{ old('phone', $profile->phone_number) }}">
                 </div>
             </div>
 

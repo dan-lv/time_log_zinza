@@ -24,6 +24,7 @@
                                 <a class="dropdown-item" href="{{ route('manage.absents.index') }}">Manage Absent</a>
                                 <a class="dropdown-item" href="{{ route('manage.timelogs.index') }}">Manage Time Logs</a>
                                 <a class="dropdown-item" href="{{ route('manage.users.index') }}">Manage User</a>
+                                <a class="dropdown-item" href="{{ route('manage.log-profiles.index') }}">Log Profile</a>
                             </div>
                         </li>
                     @else

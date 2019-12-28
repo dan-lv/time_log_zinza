@@ -28,7 +28,7 @@ class ProfileFormRequest extends FormRequest
             'fullname' => 'nullable|string|max:20',
             'gender' => 'nullable|numeric',
             'birthday' => ['nullable', new ValidDate],
-            'phone' => 'nullable|string|max:11',
+            'phone_number' => 'nullable|string|max:11',
             'address' => 'nullable|string|max:200',
             'position' => 'nullable|string|max:10',
             'role' => 'in:0, 1',
