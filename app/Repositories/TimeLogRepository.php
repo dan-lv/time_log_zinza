@@ -92,4 +92,14 @@ class TimeLogRepository implements TimeLogInterface
         ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])
         ->get();
     }
+
+    public function getExistTimeLog($request, $userId = 0) {
+        if ($userId == 0) {
+            $timeLog = TimeLog::where('day', $request['day'])->where('user_id', $request['user_id'])->first();
+        } else {
+            $timeLog = TimeLog::where('day', $request['day'])->where('user_id', $userId)->first();
+        }
+
+        return $timeLog;
+    }
 }

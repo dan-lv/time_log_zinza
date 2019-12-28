@@ -11,6 +11,7 @@ use App\Exports\ManageAbsentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
 use App\Events\AbsentReplied;
+use App\Interfaces\TimeLogInterface;
 
 class ManageAbsentController extends Controller
 {
@@ -20,10 +21,12 @@ class ManageAbsentController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $absentRequestRepository;
+    private $timeLogRepository;
 
-    public function __construct(AbsentInterface $absentRequestRepository)
+    public function __construct(AbsentInterface $absentRequestRepository, TimeLogInterface $timeLogRepository)
     {
         $this->absentRequestRepository = $absentRequestRepository;
+        $this->timeLogRepository = $timeLogRepository;
     }
 
     public function index()
@@ -42,10 +45,26 @@ class ManageAbsentController extends Controller
 
     public function store(AbsentByAdminFormRequest $request)
     {
-        $absent = $this->absentRequestRepository->createAbsentByAdmin($request->validated());
-        $request->session()->now('status', __('absent.create_success'));
+        $existAbsent = $this->absentRequestRepository->getExistAbsent($request->validated());
+        $existTimeLog = $this->timeLogRepository->getExistTimeLog($request->validated());
 
-        return view('admin.absent.show')->with('absent', $absent);
+        if (!$existAbsent && !$existTimeLog)
+        {
+            $absent = $this->absentRequestRepository->createAbsentByAdmin($request->validated());
+            $request->session()->now('status', __('absent.create_success'));
+
+            return view('admin.absent.show')->with('absent', $absent);
+        } 
+        if ($existAbsent && !$existTimeLog) {
+            $request->session()->now('status', __('absent.already_sent'));
+
+            return view('admin.absent.show')->with('absent', $existAbsent);
+        }
+        if (!$existAbsent && $existTimeLog) {
+            $request->session()->flash('status', __('time_log.exist'));
+
+            return redirect()->route('manage.absents.create');
+        }
     }
 
     /**
