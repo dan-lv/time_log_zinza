@@ -24,6 +24,10 @@ class EventServiceProvider extends ServiceProvider
         UserCreated::class => [
             CreateProfile::class,
         ],
+
+        'App\Events\AbsentReplied' => [
+            'App\Listeners\SendEmailNotification',
+        ],
     ];
 
     /**

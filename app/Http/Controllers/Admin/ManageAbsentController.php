@@ -10,6 +10,7 @@ use App\Http\Requests\ConfirmAbsentFormRequest;
 use App\Exports\ManageAbsentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
+use App\Events\AbsentReplied;
 
 class ManageAbsentController extends Controller
 {
@@ -76,7 +77,8 @@ class ManageAbsentController extends Controller
 
     public function confirm(ConfirmAbsentFormRequest $request, $id)
     {
-        $this->absentRequestRepository->confirmAbsent($request->validated(), $id);
+        $absent = $this->absentRequestRepository->confirmAbsent($request->validated(), $id);
+        event(new AbsentReplied($absent));
 
         return back();
     }
