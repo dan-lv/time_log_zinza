@@ -1,19 +1,19 @@
-$(document).ready(function() {
-    $('#btn-check-in').on('click', function(e){
+$(document).ready(function () {
+    $('#btn-check-in').on('click', function (e) {
         e.preventDefault();
         $('#confirm').attr('data-form', '#form-check-in')
     });
-    $('#btn-check-out').on('click', function(e){
+    $('#btn-check-out').on('click', function (e) {
         e.preventDefault();
         $('#confirm').attr('data-form', '#form-check-out')
     });
-    $('#confirm').click(function(e) {
+    $('#confirm').click(function (e) {
         const formSelector = $(this).data('form');
         $(formSelector).submit();
     });
 });
 //DateTime Picker
-$(document).ready(function(){
+$(document).ready(function () {
     const FORMAT_TIME = 'HH:mm:ss';
     const FORMAT_DATE = 'YYYY-MM-DD';
 
