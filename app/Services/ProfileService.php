@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-class ProfileService 
+class ProfileService
 {
     public function getFieldDiff($request, $profile) {
         $fieldDiff = [];

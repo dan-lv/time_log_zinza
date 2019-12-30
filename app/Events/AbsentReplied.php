@@ -24,6 +24,6 @@ class AbsentReplied
 
     public function __construct(AbsentRequest $absent)
     {
-        $this->absent = $absent;
+        $this->absent = $absent;    
     }
 }
