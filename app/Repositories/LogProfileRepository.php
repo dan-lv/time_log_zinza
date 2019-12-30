@@ -13,14 +13,14 @@ class LogProfileRepository
         return Carbon::now()->toDateTimeString();
     }
 
-    private function getCurrentAdmin() {
+    private function getCurrentUser() {
         return Auth::user();
     }
 
     public function createLog($userId, array $fieldDiff) {
         LogProfile::create([
             'time_change' => $this->getCurrentTimeStamp(),
-            'admin_name' => $this->getCurrentAdmin()->name,
+            'update_user_id' => $this->getCurrentUser()->id,
             'field_change' => implode(", ", $fieldDiff),
             'action' => __('profile.edit_action'),
             'user_id' => $userId,
