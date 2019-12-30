@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Repositories\LogProfileRepository;
 
-class LogProfileController extends Controller
+class ProfileLogController extends Controller
 {
     private $logProfileRepository;
 

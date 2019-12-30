@@ -4,13 +4,13 @@ namespace App\Models;
 
 use App\Models\User;
 
-class LogProfile extends BaseModel
+class ProfileLog extends BaseModel
 {
-    protected $table = 'log_profile';
+    protected $table = 'profile_logs';
 
     protected $fillable = [
         'time_change',
-        'admin_name',
+        'update_user_id',
         'field_change',
         'action',
         'user_id',
@@ -19,5 +19,10 @@ class LogProfile extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id')->withTrashed();
+    }
+
+    public function updateUser()
+    {
+        return $this->belongsTo(User::class, 'update_user_id', 'id')->withTrashed();
     }
 }

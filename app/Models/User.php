@@ -61,7 +61,7 @@ class User extends Authenticatable
         return $this->hasMany(AbsentRequest::class, 'user_id', 'id');
     }
 
-    public function logProfiles()
+    public function profileLogs()
     {
         return $this->hasMany(LogProfile::class, 'user_id', 'id');
     }

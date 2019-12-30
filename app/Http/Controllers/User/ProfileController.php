@@ -9,6 +9,7 @@ use App\Interfaces\ProfileInterface;
 use App\Interfaces\UserInterface;
 use App\Models\User;
 use App\Events\ProfileUpdated;
+use App\Services\ProfileService;
 
 class ProfileController extends Controller
 {
@@ -19,11 +20,13 @@ class ProfileController extends Controller
      */
     private $profileRepository;
     private $userRepository;
+    private $profileService;
 
-    public function __construct(ProfileInterface $profileRepository, UserInterface $userRepository)
+    public function __construct(ProfileInterface $profileRepository, UserInterface $userRepository, ProfileService $profileService)
     {
         $this->profileRepository = $profileRepository;
         $this->userRepository = $userRepository;
+        $this->profileService = $profileService;
     }
 
     /**
@@ -45,7 +48,7 @@ class ProfileController extends Controller
 
         // Get different field to log profile changes
         $profileBeforeUpdate = $this->profileRepository->getProfile($userId);
-        $fieldDiff = $this->profileRepository->getFieldDiff($request->validated(), $profileBeforeUpdate);
+        $fieldDiff = $this->profileService->getFieldDiff($request->validated(), $profileBeforeUpdate);
 
         $profileUpdated = $this->profileRepository->updateProfile($request->validated(), $userId);
 
@@ -66,7 +69,7 @@ class ProfileController extends Controller
 
         // Get different field to log profile changes
         $profileBeforeUpdate = $this->profileRepository->getProfile($userId);
-        $fieldDiff = $this->profileRepository->getFieldDiff($request->validated(), $profileBeforeUpdate);
+        $fieldDiff = $this->profileService->getFieldDiff($request->validated(), $profileBeforeUpdate);
 
         $profileUpdated = $this->profileRepository->storeImage($request->validated(), $userId);
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogProfileTables extends Migration
+class CreateProfileLogsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateLogProfileTables extends Migration
      */
     public function up()
     {
-        Schema::create('log_profile', function (Blueprint $table) {
+        Schema::create('profile_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamp('time_change');
-            $table->string('admin_name', 30);
+            $table->integer('update_user_id');
             $table->text('field_change');
             $table->string('action', 10);
             $table->integer('user_id');
@@ -31,6 +31,6 @@ class CreateLogProfileTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_profile');
+        Schema::dropIfExists('profile_logs');
     }
 }
