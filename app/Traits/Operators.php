@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
-trait Operators {
+trait Operators
+{
     private $operators = ['=', '>', '>=', '<', '<='];
 }

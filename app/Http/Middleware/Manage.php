@@ -19,13 +19,12 @@ class Manage
     {
         if (Auth::check()) {
             if (Auth::user()->role == User::IS_ADMIN) {
-                
                 return $next($request);
             } else {
                 return redirect('/');
             }
         } else {
             return redirect()->route('login');
-        }    
+        }
     }
 }

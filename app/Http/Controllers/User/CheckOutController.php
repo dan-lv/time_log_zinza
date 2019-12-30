@@ -25,7 +25,7 @@ class CheckOutController extends Controller
     public function store()
     {
         $userId = $this->userRepository->getCurrentUserId();
-        $checkTimeLog = $this->timeLogRepository->getTimeLogToday($userId); 
+        $checkTimeLog = $this->timeLogRepository->getTimeLogToday($userId);
 
         if ($checkTimeLog) {
             if (empty($checkTimeLog->check_out)) {
