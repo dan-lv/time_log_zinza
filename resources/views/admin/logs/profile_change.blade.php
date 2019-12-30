@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ $log->time_change }}</td>
                     <td> Admin:
-                        {{ $log->admin_name.' '.$log->action.' '.$log->field_change }}
+                        {{ $log->updateUser->name.' '.$log->action.' '.$log->field_change }}
                         <a href="{{ route('profiles.show', $log->user_id) }}"> {{ $log->user->name }}</a> 
                     </td>
                 </tr>
