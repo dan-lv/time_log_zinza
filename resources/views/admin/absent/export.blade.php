@@ -6,6 +6,8 @@
             <th scope="col">Absent To</th>
             <th scope="col">Reason</th>
             <th scope="col">Staff Name</th>
+            <th scope="col">Absent Time(hour)</th>
+            <td>{{ $absentTime }}</td>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +19,6 @@
             <td>{{ $absent->reason }}</td>
             <td>{{ $absent->user->name }}</td>
         </tr>
-        @endforeach
+        @endforeach 
     </tbody>
 </table>

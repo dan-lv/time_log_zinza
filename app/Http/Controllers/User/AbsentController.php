@@ -10,6 +10,7 @@ use App\Exports\UserAbsentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
 use App\Interfaces\TimeLogInterface;
+use App\Events\AbsentCreated;
 
 class AbsentController extends Controller
 {
@@ -48,7 +49,8 @@ class AbsentController extends Controller
     
         if (!$existAbsent && !$existTimeLog) {
             $this->absentRequestRepository->createAbsentRequest($request->validated(), $userId);
-
+            event(new AbsentCreated);
+            
             return redirect()->route('absents.create')->with('status', __('absent.success'));
         }
         if ($existAbsent && !$existTimeLog) {
@@ -77,7 +79,8 @@ class AbsentController extends Controller
     {
         $userId = $this->userRepository->getCurrentUserId();
         $absents = $this->absentRequestRepository->getAcceptedAbsentsByUserId($request->validated(), $userId);
+        $absentTime = $this->absentRequestRepository->getAbsentTime($absents);
 
-        return Excel::download(new UserAbsentExport($absents), 'Absents.xlsx');
+        return Excel::download(new UserAbsentExport($absents, $absentTime), 'Absents.xlsx');
     }
 }

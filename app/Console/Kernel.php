@@ -14,7 +14,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\UserMissTimeLogs::class
+        'App\Console\Commands\UserMissTimeLogs',
+        'App\Console\Commands\CaculateWorkingTime',
+        'App\Console\Commands\CaculateAbsentTime'
     ];
 
     /**
@@ -25,8 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('email:miss-timelog')
-                ->everyMinute();
+        // $schedule->command('email:miss-timelog')
+        //         ->everyMinute();
     }
 
     /**

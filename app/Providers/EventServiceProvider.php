@@ -25,6 +25,14 @@ class EventServiceProvider extends ServiceProvider
             CreateProfile::class,
         ],
 
+        'App\Events\TimeLogCreated' => [
+            'App\Listeners\CaculateWorkingTime'
+        ],
+
+        'App\Events\AbsentCreated' => [
+            'App\Listeners\CaculateAbsentTime'
+        ],
+
         'App\Events\ProfileUpdated' => [
             'App\Listeners\CreateLogProfile',
         ],
@@ -42,7 +50,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

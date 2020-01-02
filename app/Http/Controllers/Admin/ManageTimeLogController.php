@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
 use App\Interfaces\AbsentInterface;
 use App\Models\AbsentRequest;
+use App\Events\TimeLogCreated;
 
 class ManageTimeLogController extends Controller
 {
@@ -59,6 +60,7 @@ class ManageTimeLogController extends Controller
         if (!$existAbsent||($existAbsent->status == AbsentRequest::STATUS_DENY)) {
             if (!$existTimeLog) {
                 $timeLog = $this->timeLogRepository->createTimeLog($request->validated());
+                event(new TimeLogCreated);
                 $request->session()->now('status', __('time_log.create_success'));
 
                 return view('admin.timelog.create_edit')->with('timeLog', $timeLog);
@@ -113,7 +115,8 @@ class ManageTimeLogController extends Controller
     public function export(FilterExportFormRequest $request)
     {
         $timeLogs = $this->timeLogRepository->getAllToExport($request->validated());
+        $workingTime = $this->timeLogRepository->getWorkingTime($timeLogs);
 
-        return Excel::download(new ManageTimeLogExport($timeLogs), 'TimeLogs.xlsx');
+        return Excel::download(new ManageTimeLogExport($timeLogs, $workingTime), 'TimeLogs.xlsx');
     }
 }

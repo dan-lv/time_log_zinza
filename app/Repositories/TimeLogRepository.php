@@ -127,4 +127,28 @@ class TimeLogRepository implements TimeLogInterface
     {
         return $this->getAllTimeLogsToday()->pluck('user_id')->toArray();
     }
+
+    public function caculateWorkingTime()
+    {
+        $timeLogs = TimeLog::whereNull('working_time')->get();
+
+        foreach ($timeLogs as $timeLog) {
+            $hourDiff = Carbon::parse($timeLog->check_out)->floatDiffInHours($timeLog->check_in);
+            
+            if ($hourDiff >= 8) {
+                $workingTime = 8;
+            } else {
+                $workingTime = $hourDiff;
+            }
+
+            $timeLog->update([
+                'working_time' => $workingTime,
+            ]);
+        }
+    }
+
+    public function getWorkingTime($timeLogs)
+    {
+        return array_sum($timeLogs->pluck('working_time')->toArray());
+    }
 }

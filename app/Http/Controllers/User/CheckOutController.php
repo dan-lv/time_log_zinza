@@ -7,6 +7,7 @@ use App\Interfaces\TimeLogInterface;
 use App\Interfaces\UserInterface;
 use App\Interfaces\AbsentInterface;
 use App\Models\AbsentRequest;
+use App\Events\TimeLogCreated;
 
 class CheckOutController extends Controller
 {
@@ -38,6 +39,7 @@ class CheckOutController extends Controller
             } else {
                 if (!$existTimeLog->check_out) {
                     $this->timeLogRepository->setCheckOut($existTimeLog);
+                    event(new TimeLogCreated);
 
                     return redirect('/')->with('status', trans('time_log.check_out_success'));
                 } else {

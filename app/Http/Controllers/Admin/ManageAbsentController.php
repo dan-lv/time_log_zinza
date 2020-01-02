@@ -10,6 +10,7 @@ use App\Http\Requests\ConfirmAbsentFormRequest;
 use App\Exports\ManageAbsentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
+use App\Events\AbsentCreated;
 use App\Events\AbsentReplied;
 use App\Interfaces\TimeLogInterface;
 
@@ -50,6 +51,7 @@ class ManageAbsentController extends Controller
 
         if (!$existAbsent && !$existTimeLog) {
             $absent = $this->absentRequestRepository->createAbsentByAdmin($request->validated());
+            event(new AbsentCreated);
             $request->session()->now('status', __('absent.create_success'));
 
             return view('admin.absent.show')->with('absent', $absent);
@@ -111,7 +113,8 @@ class ManageAbsentController extends Controller
     public function export(FilterExportFormRequest $request)
     {
         $absents = $this->absentRequestRepository->getAcceptedAbsentsByFilter($request->validated());
+        $absentTime = $this->absentRequestRepository->getAbsentTime($absents);
 
-        return Excel::download(new ManageAbsentExport($absents), 'Absents.xlsx');
+        return Excel::download(new ManageAbsentExport($absents, $absentTime), 'Absents.xlsx');
     }
 }

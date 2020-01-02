@@ -32,7 +32,8 @@ class TimeLogController extends Controller
     {
         $userId = $this->userRepository->getCurrentUserId();
         $timeLogs = $this->timeLogRepository->getAllToExportByUserId($request->validated(), $userId);
+        $workingTime = $this->timeLogRepository->getWorkingTime($timeLogs);
 
-        return Excel::download(new UserTimeLogExport($timeLogs), 'TimeLogs.xlsx');
+        return Excel::download(new UserTimeLogExport($timeLogs, $workingTime), 'TimeLogs.xlsx');
     }
 }
