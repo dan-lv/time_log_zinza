@@ -13,11 +13,13 @@ class AbsentRepository implements AbsentInterface
 
     const NUMBER_OF_ITEM = 5;
 
-    public function model() {
+    public function model()
+    {
         return new AbsentRequest;
     }
 
-    public function createAbsentRequest($request, $userId) {
+    public function createAbsentRequest($request, $userId)
+    {
         AbsentRequest::create([
             'time_absent_from' => $request['absent_from'],
             'time_absent_to' => $request['absent_to'],
@@ -27,7 +29,8 @@ class AbsentRepository implements AbsentInterface
         ]);
     }
 
-    public function getAbsentToday($userId) {
+    public function getAbsentToday($userId)
+    {
         $currentTime = Carbon::now();
         $today = $currentTime->toDateString();
         $checkAbsent = AbsentRequest::where('user_id', $userId)->where('day', $today)->first();
@@ -35,17 +38,20 @@ class AbsentRepository implements AbsentInterface
         return $checkAbsent;
     }
 
-    public function getAbsentByUserId($userId) {
+    public function getAbsentByUserId($userId)
+    {
 
         return AbsentRequest::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
     }
 
-    public function getAllAbsents() {
+    public function getAllAbsents()
+    {
 
         return AbsentRequest::with('user')->paginate(self::NUMBER_OF_ITEM);
     }
 
-    public function updateAbsent($request, $id) {
+    public function updateAbsent($request, $id)
+    {
         
         $absent = $this->getAbsentById($id);
 
@@ -57,7 +63,8 @@ class AbsentRepository implements AbsentInterface
         ]);
     }
 
-    public function confirmAbsent($request, $id) {
+    public function confirmAbsent($request, $id)
+    {
         
         $absent = $this->getAbsentById($id);
 
@@ -68,12 +75,14 @@ class AbsentRepository implements AbsentInterface
         return $absent;
     }
 
-    public function getAbsentById($id) {
+    public function getAbsentById($id)
+    {
 
         return AbsentRequest::where('id', $id)->first();
     }
 
-    public function createAbsentByAdmin($request) {
+    public function createAbsentByAdmin($request)
+    {
         return AbsentRequest::create([
             'time_absent_from' => $request['absent_from'],
             'time_absent_to' => $request['absent_to'],
@@ -83,12 +92,14 @@ class AbsentRepository implements AbsentInterface
         ]);
     }
 
-    public function getProcessingAbsents() {
+    public function getProcessingAbsents()
+    {
 
         return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_PROCESSING)->paginate(self::NUMBER_OF_ITEM);
     }
 
-    public function getAcceptedAbsentsByUserId($request, $userId) {
+    public function getAcceptedAbsentsByUserId($request, $userId)
+    {
 
         return AbsentRequest::where('user_id', $userId)
         ->where('status', AbsentRequest::STATUS_ACCEPTED)
@@ -96,7 +107,8 @@ class AbsentRepository implements AbsentInterface
         ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])->get();
     }
 
-    public function getAcceptedAbsentsByFilter($request) {
+    public function getAcceptedAbsentsByFilter($request)
+    {
 
         return AbsentRequest::with('user')
         ->where('status', AbsentRequest::STATUS_ACCEPTED)

@@ -18,7 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
     'namespace' => 'User',
     'middleware' => 'auth',
-], function() {
+], function () {
     Route::get('/', function () {
         return view('user.home');
     });
@@ -36,7 +36,7 @@ Route::namespace('Admin')
 ->name('manage.')
 ->middleware('manage')
 ->prefix('manage')
-->group(function() {
+->group(function () {
     Route::resource('absents', 'ManageAbsentController')->except('show');
     Route::resource('users.absents', 'UserAbsentController')->only('index');
     Route::get('absents/processing', 'ManageAbsentController@processingAbsents')->name('absents.processing');

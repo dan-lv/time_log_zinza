@@ -4,13 +4,15 @@ namespace App\Repositories;
 use App\Interfaces\ProfileInterface;
 use App\Models\Profile;
 
-class ProfileRepository implements ProfileInterface 
+class ProfileRepository implements ProfileInterface
 {
-    public function getProfile($userId) {
+    public function getProfile($userId)
+    {
         return Profile::where('user_id', $userId)->first();
     }
 
-    public function updateProfile($request, $userId) {
+    public function updateProfile($request, $userId)
+    {
         $profile = Profile::where('user_id', $userId)->first();
 
         $profile->update([
@@ -25,7 +27,8 @@ class ProfileRepository implements ProfileInterface
         return $profile;
     }
 
-    public function storeImage($request, $userId) {
+    public function storeImage($request, $userId)
+    {
         $image = $request['image'];
         $nameImage = $image->getClientOriginalName();
         $image->move('images', $nameImage);
@@ -36,7 +39,8 @@ class ProfileRepository implements ProfileInterface
         return $profile;
     }
 
-    public function createProfile(object $user) {
+    public function createProfile(object $user)
+    {
         Profile::create([
             'user_id' => $user->id,
             'fullname' => $user->name,

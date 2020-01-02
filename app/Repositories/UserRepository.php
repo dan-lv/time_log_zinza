@@ -10,11 +10,13 @@ class UserRepository implements UserInterface
 {
     const NUMBER_OF_ITEM = 10;
 
-    public function getCurrentUserId() {
+    public function getCurrentUserId()
+    {
         return Auth::user()->id;
     }
 
-    public function createUser($data) {
+    public function createUser($data)
+    {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -22,15 +24,18 @@ class UserRepository implements UserInterface
         ]);
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         return User::paginate(self::NUMBER_OF_ITEM);
     }
 
-    public function deleteById($userId) {
+    public function deleteById($userId)
+    {
         User::find($userId)->delete();
     }
 
-    public function updateRole($request, $userId) {
+    public function updateRole($request, $userId)
+    {
         $user = User::find($userId);
         
         $user->update([
@@ -38,7 +43,8 @@ class UserRepository implements UserInterface
         ]);
     }
 
-    public function getCurrentUserRole() {
+    public function getCurrentUserRole()
+    {
         return Auth::user()->role;
     }
 }
