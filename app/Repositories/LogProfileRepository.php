@@ -9,15 +9,18 @@ class LogProfileRepository
 {
     const NUMBER_OF_ITEM = 10;
 
-    private function getCurrentTimeStamp() {
+    private function getCurrentTimeStamp()
+    {
         return Carbon::now()->toDateTimeString();
     }
 
-    private function getCurrentUser() {
+    private function getCurrentUser()
+    {
         return Auth::user();
     }
 
-    public function createLog($userId, array $fieldDiff) {
+    public function createLog($userId, array $fieldDiff)
+    {
         ProfileLog::create([
             'time_change' => $this->getCurrentTimeStamp(),
             'update_user_id' => $this->getCurrentUser()->id,
@@ -27,7 +30,8 @@ class LogProfileRepository
         ]);
     }
 
-    public function getAllLogs() {
+    public function getAllLogs()
+    {
         return ProfileLog::orderBy('created_at', 'desc')->paginate(self::NUMBER_OF_ITEM);
     }
 }

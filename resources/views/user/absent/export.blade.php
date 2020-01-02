@@ -5,6 +5,8 @@
             <th scope="col">Absent From</th>
             <th scope="col">Absent To</th>
             <th scope="col">Reason</th>
+            <th scope="col">Absent Time(hour)</th>
+            <td>{{ $absentTime }}</td>
         </tr>
     </thead>
     <tbody>

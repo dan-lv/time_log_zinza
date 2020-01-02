@@ -12,16 +12,19 @@ class UserAbsentExport implements FromView, ShouldAutoSize
     * @return \Illuminate\Support\Collection
     */
     private $absents;
+    private $absentTime;
 
-    public function __construct($absents)
+    public function __construct($absents, $absentTime)
     {
         $this->absents = $absents;
+        $this->absentTime = $absentTime;
     }
 
     public function view(): View
     {
         return view('user.absent.export', [
             'absents' => $this->absents,
+            'absentTime' => $this->absentTime,
         ]);
     }
 }

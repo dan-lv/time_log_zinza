@@ -115,4 +115,28 @@ class AbsentRepository implements AbsentInterface
         ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
         ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])->get();
     }
+
+    public function caculateAbsentTime()
+    {
+        $absents = AbsentRequest::whereNull('absent_time')->get();
+
+        foreach ($absents as $absent) {
+            $hourDiff = Carbon::parse($absent->time_absent_from)->floatDiffInHours($absent->time_absent_to);
+            
+            if ($hourDiff >= 8) {
+                $absentTime = 8;
+            } else {
+                $absentTime = $hourDiff;
+            }
+
+            $absent->update([
+                'absent_time' => $absentTime,
+            ]);
+        }
+    }
+
+    public function getAbsentTime($absents)
+    {
+        return array_sum($absents->pluck('absent_time')->toArray());
+    }
 }

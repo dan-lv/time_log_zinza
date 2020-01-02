@@ -15,6 +15,7 @@ class AbsentRequest extends BaseModel
         'day',
         'status',
         'user_id',
+        'absent_time'
     ];
 
     public function user()

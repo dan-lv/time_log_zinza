@@ -12,16 +12,19 @@ class UserTimeLogExport implements FromView, ShouldAutoSize
     * @return \Illuminate\Support\Collection
     */
     private $timeLogs;
+    private $workingTime;
 
-    public function __construct($timeLogs)
+    public function __construct($timeLogs, $workingTime)
     {
         $this->timeLogs = $timeLogs;
+        $this->workingTime = $workingTime;
     }
 
     public function view(): View
     {
         return view('user.timelog.export', [
             'timeLogs' => $this->timeLogs,
+            'workingTime' => $this->workingTime,
         ]);
     }
 }
