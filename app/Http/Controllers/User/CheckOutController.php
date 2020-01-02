@@ -48,6 +48,5 @@ class CheckOutController extends Controller
         if ($existAbsent && !$existTimeLog) {
             return redirect('/')->with('status', trans('absent.exist'));
         }
-
     }
 }

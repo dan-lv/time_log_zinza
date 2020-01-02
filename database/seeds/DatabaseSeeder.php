@@ -12,11 +12,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-        	UsersTableSeeder::class,
-        	// ProfilesTableSeeder::class,
-        	AbsentRequestsTableSeeder::class,
-        	// TimeLogsTableSeeder::class,
-        	TrackingChangesTableSeeder::class,
+            UsersTableSeeder::class,
+            // ProfilesTableSeeder::class,
+            AbsentRequestsTableSeeder::class,
+            // TimeLogsTableSeeder::class,
+            TrackingChangesTableSeeder::class,
         ]);
     }
 }

@@ -5,7 +5,6 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\TimeLog;
 
-
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -15,7 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-    	$user = [
+        $user = [
             'name' => 'Do Nhu Dan',
             'email' => 'nhudanmkt@gmail.com',
             'email_verified_at' => now(),

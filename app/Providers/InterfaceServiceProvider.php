@@ -13,7 +13,6 @@ class InterfaceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       
     }
 
     /**

@@ -17,11 +17,13 @@ class TimeLogRepository implements TimeLogInterface
         return Carbon::now();
     }
 
-    public function model() {
+    public function model()
+    {
         return new TimeLog;
     }
 
-    public function getTimeLogToday($userId) {
+    public function getTimeLogToday($userId)
+    {
         $currentTime = $this->getTime();
         $today = $currentTime->toDateString();
         $checkTimeLog = TimeLog::where('user_id', $userId)->where('day', $today)->first();
@@ -29,7 +31,8 @@ class TimeLogRepository implements TimeLogInterface
         return $checkTimeLog;
     }
 
-    public function setCheckIn($userId) {
+    public function setCheckIn($userId)
+    {
         
         TimeLog::create([
             'check_in' => $this->getTime()->toTimeString(),
@@ -38,23 +41,27 @@ class TimeLogRepository implements TimeLogInterface
         ]);
     }
 
-    public function setCheckOut($checkTimeLog) {
+    public function setCheckOut($checkTimeLog)
+    {
         $currentTime = $this->getTime();
         $checkTimeLog->update([
             'check_out' => $currentTime->toTimeString(),
         ]);
     }
 
-    public function getTimeLogsByUserId($userId) {
+    public function getTimeLogsByUserId($userId)
+    {
 
         return TimeLog::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         return TimeLog::with('user')->paginate(self::NUMBER_OF_ITEM);
     }
 
-    public function createTimeLog($request) {
+    public function createTimeLog($request)
+    {
         return TimeLog::create([
             'check_in' => $request['check_in_time'],
             'check_out' => $request['check_out_time'],
@@ -63,11 +70,13 @@ class TimeLogRepository implements TimeLogInterface
         ]);
     }
 
-    public function getTimeLogById($id) {
+    public function getTimeLogById($id)
+    {
         return TimeLog::where('id', $id)->first();
     }
 
-    public function updateTimeLog($request, $id) {
+    public function updateTimeLog($request, $id)
+    {
         $timeLog = $this->getTimeLogById($id);
 
         $timeLog->update([
@@ -79,21 +88,24 @@ class TimeLogRepository implements TimeLogInterface
         return $timeLog;
     }
 
-    public function getAllToExportByUserId($request, $userId) {
+    public function getAllToExportByUserId($request, $userId)
+    {
         return TimeLog::where('user_id', $userId)
         ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
         ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])
         ->get();
     }
 
-    public function getAllToExport($request) {
+    public function getAllToExport($request)
+    {
         return TimeLog::with('user')
         ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
         ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])
         ->get();
     }
 
-    public function getExistTimeLog($request, $userId = 0) {
+    public function getExistTimeLog($request, $userId = 0)
+    {
         if ($userId == 0) {
             $timeLog = TimeLog::where('day', $request['day'])->where('user_id', $request['user_id'])->first();
         } else {
@@ -101,5 +113,23 @@ class TimeLogRepository implements TimeLogInterface
         }
 
         return $timeLog;
+    }
+
+    public function getAllTimeLogsToday()
+    {
+        $currentTime = $this->getTime();
+        $today = $currentTime->toDateString();
+
+        return TimeLog::where('day', $today);
+    }
+
+    public function getUserHasTimeLog()
+    {
+        return $this->getAllTimeLogsToday()->pluck('user_id')->toArray();
+    }
+
+    public function getMissCheckOutUser()
+    {
+        return $this->getAllTimeLogsToday()->whereNull('check_out')->pluck('user_id')->toArray();
     }
 }
