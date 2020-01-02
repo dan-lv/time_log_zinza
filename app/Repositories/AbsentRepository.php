@@ -54,7 +54,7 @@ class AbsentRepository implements AbsentInterface
             'time_absent_to' => $request['absent_to'],
             'day' => $request['day'],
             'reason' => $request['reason'],
-        ]);        
+        ]);
     }
 
     public function confirmAbsent($request, $id) {

@@ -12,6 +12,7 @@ class Profile extends BaseModel
         'phone_number',
         'address',
         'position',
+        'image',
         'user_id',
     ];
 

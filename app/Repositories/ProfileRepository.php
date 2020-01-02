@@ -12,15 +12,17 @@ class ProfileRepository implements ProfileInterface
 
     public function updateProfile($request, $userId) {
         $profile = Profile::where('user_id', $userId)->first();
-        
+
         $profile->update([
             'fullname' => $request['fullname'],
             'gender' => $request['gender'],
             'birthday' => $request['birthday'],
-            'phone_number' => $request['phone'],
+            'phone_number' => $request['phone_number'],
             'address' => $request['address'],
             'position' => $request['position'],
         ]);
+
+        return $profile;
     }
 
     public function storeImage($request, $userId) {
