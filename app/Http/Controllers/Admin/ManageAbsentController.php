@@ -48,13 +48,12 @@ class ManageAbsentController extends Controller
         $existAbsent = $this->absentRequestRepository->getExistAbsent($request->validated());
         $existTimeLog = $this->timeLogRepository->getExistTimeLog($request->validated());
 
-        if (!$existAbsent && !$existTimeLog)
-        {
+        if (!$existAbsent && !$existTimeLog) {
             $absent = $this->absentRequestRepository->createAbsentByAdmin($request->validated());
             $request->session()->now('status', __('absent.create_success'));
 
             return view('admin.absent.show')->with('absent', $absent);
-        } 
+        }
         if ($existAbsent && !$existTimeLog) {
             $request->session()->now('status', __('absent.already_sent'));
 

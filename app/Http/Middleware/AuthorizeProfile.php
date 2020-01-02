@@ -22,12 +22,11 @@ class AuthorizeProfile
         
         if ($roleCurrentUser == User::IS_ADMIN) {
             return $next($request);
-        }  
+        }
         if ($roleCurrentUser == User::IS_USER) {
             if ($request->profile == $currentUserId) {
                 return $next($request);
-            }
-            else {
+            } else {
                 return back();
             }
         }
