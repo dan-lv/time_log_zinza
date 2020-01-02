@@ -13,6 +13,7 @@ jobs:
       - checkout
       - restore_cache:
           key: v1-php
+      - run: curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
       - save_cache:
           key: v1-php
           paths: 
