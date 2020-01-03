@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\CaculateWorkingTime',
-        'App\Console\Commands\CaculateAbsentTime'
+        'App\Console\Commands\CalculateWorkingTime',
+        'App\Console\Commands\CalculateAbsentTime'
     ];
 
     /**

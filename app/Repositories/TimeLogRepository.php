@@ -104,7 +104,7 @@ class TimeLogRepository implements TimeLogInterface
         ->get();
     }
 
-    public function caculateWorkingTime()
+    public function calculateWorkingTime()
     {
         $timeLogs = TimeLog::whereNull('working_time')->get();
 
@@ -125,6 +125,6 @@ class TimeLogRepository implements TimeLogInterface
 
     public function getWorkingTime($timeLogs)
     {
-        return array_sum($timeLogs->pluck('working_time')->toArray());
+        return $timeLogs->sum('working_time');
     }
 }
