@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Interfaces\TimeLogInterface;
 
-class CaculateWorkingTime implements ShouldQueue
+class CalculateWorkingTime implements ShouldQueue
 {
     private $timeLogRepository;
 
@@ -24,6 +24,6 @@ class CaculateWorkingTime implements ShouldQueue
      */
     public function handle(TimeLogCreated $event)
     {
-        $this->timeLogRepository->caculateWorkingTime();
+        $this->timeLogRepository->calculateWorkingTime();
     }
 }

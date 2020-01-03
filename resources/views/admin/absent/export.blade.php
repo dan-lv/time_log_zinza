@@ -19,6 +19,6 @@
             <td>{{ $absent->reason }}</td>
             <td>{{ $absent->user->name }}</td>
         </tr>
-        @endforeach 
+        @endforeach
     </tbody>
 </table>

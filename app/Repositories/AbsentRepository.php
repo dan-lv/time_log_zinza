@@ -127,7 +127,7 @@ class AbsentRepository implements AbsentInterface
         return $absent;
     }
 
-    public function getAllAbsentsToday(): object
+    public function getAllAbsentsToday()
     {
         $currentTime = Carbon::now();
         $today = $currentTime->toDateString();
@@ -140,13 +140,13 @@ class AbsentRepository implements AbsentInterface
         return $this->getAllAbsentsToday()->pluck('user_id')->toArray();
     }
 
-    public function caculateAbsentTime()
+    public function calculateAbsentTime()
     {
         $absents = AbsentRequest::whereNull('absent_time')->get();
 
         foreach ($absents as $absent) {
             $hourDiff = Carbon::parse($absent->time_absent_from)->floatDiffInHours($absent->time_absent_to);
-            
+
             if ($hourDiff >= 8) {
                 $absentTime = 8;
             } else {
@@ -161,6 +161,6 @@ class AbsentRepository implements AbsentInterface
 
     public function getAbsentTime($absents)
     {
-        return array_sum($absents->pluck('absent_time')->toArray());
+        return $absents->sum('absent_time');
     }
 }

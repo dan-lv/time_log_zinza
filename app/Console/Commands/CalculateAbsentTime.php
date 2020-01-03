@@ -3,35 +3,35 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Interfaces\TimeLogInterface;
+use App\Interfaces\AbsentInterface;
 
-class CaculateWorkingTime extends Command
+class CalculateAbsentTime extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'caculate:working-time';
+    protected $signature = 'calculate:absent-time';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Caculate Working Time of Staff';
+    protected $description = 'Caculate Absent Time of Staff';
 
-    private $timeLogRepository;
+    private $absentRequestRepository;
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(TimeLogInterface $timeLogRepository)
+    public function __construct(AbsentInterface $absentRequestRepository)
     {
         parent::__construct();
 
-        $this->timeLogRepository = $timeLogRepository;
+        $this->absentRequestRepository = $absentRequestRepository;
     }
 
     /**
@@ -41,6 +41,6 @@ class CaculateWorkingTime extends Command
      */
     public function handle()
     {
-        $this->timeLogRepository->caculateWorkingTime();
+        $this->absentRequestRepository->calculateAbsentTime();
     }
 }

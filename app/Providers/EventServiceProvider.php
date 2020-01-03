@@ -26,11 +26,11 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'App\Events\TimeLogCreated' => [
-            'App\Listeners\CaculateWorkingTime'
+            'App\Listeners\CalculateWorkingTime'
         ],
 
         'App\Events\AbsentCreated' => [
-            'App\Listeners\CaculateAbsentTime'
+            'App\Listeners\CalculateAbsentTime'
         ],
 
         'App\Events\ProfileUpdated' => [

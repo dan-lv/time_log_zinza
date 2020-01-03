@@ -115,7 +115,7 @@ class TimeLogRepository implements TimeLogInterface
         return $timeLog;
     }
 
-    public function getAllTimeLogsToday(): object
+    public function getAllTimeLogsToday()
     {
         $currentTime = $this->getTime();
         $today = $currentTime->toDateString();
@@ -128,7 +128,7 @@ class TimeLogRepository implements TimeLogInterface
         return $this->getAllTimeLogsToday()->pluck('user_id')->toArray();
     }
 
-    public function caculateWorkingTime()
+    public function calculateWorkingTime()
     {
         $timeLogs = TimeLog::whereNull('working_time')->get();
 
@@ -149,6 +149,6 @@ class TimeLogRepository implements TimeLogInterface
 
     public function getWorkingTime($timeLogs)
     {
-        return array_sum($timeLogs->pluck('working_time')->toArray());
+        return $timeLogs->sum('working_time');
     }
 }

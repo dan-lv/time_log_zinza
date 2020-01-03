@@ -15,8 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         'App\Console\Commands\UserMissTimeLogs',
-        'App\Console\Commands\CaculateWorkingTime',
-        'App\Console\Commands\CaculateAbsentTime'
+        'App\Console\Commands\CalculateWorkingTime',
+        'App\Console\Commands\CalculateAbsentTime'
     ];
 
     /**

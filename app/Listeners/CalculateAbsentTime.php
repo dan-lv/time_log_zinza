@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Interfaces\AbsentInterface;
 
-class CaculateAbsentTime implements ShouldQueue
+class CalculateAbsentTime implements ShouldQueue
 {
     private $absentRequestRepository;
 
@@ -24,6 +24,6 @@ class CaculateAbsentTime implements ShouldQueue
      */
     public function handle(AbsentCreated $event)
     {
-        $this->absentRequestRepository->caculateAbsentTime();
+        $this->absentRequestRepository->calculateAbsentTime();
     }
 }
