@@ -104,9 +104,20 @@ class TimeLogRepository implements TimeLogInterface
         ->get();
     }
 
+    public function getExistTimeLog($request, $userId = 0)
+    {
+        if ($userId == 0) {
+            $timeLog = TimeLog::where('day', $request['day'])->where('user_id', $request['user_id'])->first();
+        } else {
+            $timeLog = TimeLog::where('day', $request['day'])->where('user_id', $userId)->first();
+        }
+
+        return $timeLog;
+    }
+
     public function calculateWorkingTime()
     {
-        $timeLogs = TimeLog::whereNull('working_time')->get();
+        $timeLogs = TimeLog::whereNull('working_time')->whereNotNull('check_out')->get();
 
         foreach ($timeLogs as $timeLog) {
             $hourDiff = Carbon::parse($timeLog->check_out)->floatDiffInHours($timeLog->check_in);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Interfaces\TimeLogInterface;
 use App\Interfaces\UserInterface;
+use App\Interfaces\AbsentInterface;
+use App\Models\AbsentRequest;
 use App\Events\TimeLogCreated;
 
 class CheckOutController extends Controller
@@ -16,29 +18,37 @@ class CheckOutController extends Controller
      */
     private $timeLogRepository;
     private $userRepository;
+    private $absentRequestRepository;
 
-    public function __construct(TimeLogInterface $timeLogRepository, UserInterface $userRepository)
+    public function __construct(TimeLogInterface $timeLogRepository, UserInterface $userRepository, AbsentInterface $absentRequestRepository)
     {
         $this->timeLogRepository = $timeLogRepository;
         $this->userRepository = $userRepository;
+        $this->absentRequestRepository = $absentRequestRepository;
     }
 
     public function store()
     {
         $userId = $this->userRepository->getCurrentUserId();
-        $checkTimeLog = $this->timeLogRepository->getTimeLogToday($userId);
+        $existTimeLog = $this->timeLogRepository->getTimeLogToday($userId);
+        $existAbsent = $this->absentRequestRepository->getAbsentToday($userId);
 
-        if ($checkTimeLog) {
-            if (empty($checkTimeLog->check_out)) {
-                $this->timeLogRepository->setCheckOut($checkTimeLog);
-                event(new TimeLogCreated);
-
-                return redirect('/')->with('status', trans('time_log.check_out_success'));
+        if (!$existAbsent||($existAbsent->status == AbsentRequest::STATUS_DENY)) {
+            if (!$existTimeLog) {
+                return redirect('/')->with('status', trans('time_log.check_in_first'));
             } else {
-                return redirect('/')->with('status', trans('time_log.check_out_fail'));
+                if (!$existTimeLog->check_out) {
+                    $this->timeLogRepository->setCheckOut($existTimeLog);
+                    event(new TimeLogCreated);
+
+                    return redirect('/')->with('status', trans('time_log.check_out_success'));
+                } else {
+                    return redirect('/')->with('status', trans('time_log.exist'));
+                }
             }
-        } else {
-            return redirect('/')->with('status', trans('time_log.check_in_first'));
+        }
+        if ($existAbsent && !$existTimeLog) {
+            return redirect('/')->with('status', trans('absent.exist'));
         }
     }
 }

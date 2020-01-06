@@ -8,15 +8,19 @@ use App\Interfaces\TimeLogInterface;
 use App\Exports\ManageTimeLogExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
+use App\Interfaces\AbsentInterface;
+use App\Models\AbsentRequest;
 use App\Events\TimeLogCreated;
 
 class ManageTimeLogController extends Controller
 {
     private $timeLogRepository;
+    private $absentRequestRepository;
 
-    public function __construct(TimeLogInterface $timeLogRepository)
+    public function __construct(TimeLogInterface $timeLogRepository, AbsentInterface $absentRequestRepository)
     {
         $this->timeLogRepository = $timeLogRepository;
+        $this->absentRequestRepository = $absentRequestRepository;
     }
     /**
      * Display a listing of the resource.
@@ -50,11 +54,27 @@ class ManageTimeLogController extends Controller
      */
     public function store(TimeLogFormRequest $request)
     {
-        $timeLog = $this->timeLogRepository->createTimeLog($request->validated());
-        event(new TimeLogCreated);
-        $request->session()->now('status', __('time_log.create_success'));
+        $existAbsent = $this->absentRequestRepository->getExistAbsent($request->validated());
+        $existTimeLog = $this->timeLogRepository->getExistTimeLog($request->validated());
 
-        return view('admin.timelog.create_edit')->with('timeLog', $timeLog);
+        if (!$existAbsent||($existAbsent->status == AbsentRequest::STATUS_DENY)) {
+            if (!$existTimeLog) {
+                $timeLog = $this->timeLogRepository->createTimeLog($request->validated());
+                event(new TimeLogCreated);
+                $request->session()->now('status', __('time_log.create_success'));
+
+                return view('admin.timelog.create_edit')->with('timeLog', $timeLog);
+            } else {
+                $request->session()->now('status', __('time_log.exist'));
+
+                return view('admin.timelog.create_edit')->with('timeLog', $existTimeLog);
+            }
+        }
+        if ($existAbsent && !$existTimeLog) {
+            $request->session()->flash('status', __('absent.exist'));
+
+            return redirect()->route('manage.timelogs.create');
+        }
     }
 
     /**
@@ -80,6 +100,7 @@ class ManageTimeLogController extends Controller
     public function update(TimeLogFormRequest $request, $id)
     {
         $timeLog = $this->timeLogRepository->updateTimeLog($request->validated(), $id);
+        event(new TimeLogCreated);
         $request->session()->now('status', __('time_log.edit_success'));
 
         return view('admin.timelog.create_edit')->with('timeLog', $timeLog);

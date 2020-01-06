@@ -2,7 +2,8 @@
 
 return [
     'success' => 'Request send successful!',
-    'already_sent' => 'You absent requested one time today!',
+    'already_sent' => 'This absent requested one time',
     'edit_success' => 'This absent edited success',
     'create_success' => 'Absent created success',
+    'exist' => 'Absent existed this day'
 ];

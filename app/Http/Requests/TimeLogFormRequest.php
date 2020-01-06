@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidTime;
 use App\Rules\ValidDate;
+use App\Rules\ValidCheckOutTime;
+use Illuminate\Http\Request;
 
 class TimeLogFormRequest extends FormRequest
 {
@@ -23,11 +25,11 @@ class TimeLogFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
             'check_in_time' => ['required', new ValidTime],
-            'check_out_time' => ['required', new ValidTime],
+            'check_out_time' => ['required', new ValidTime, new ValidCheckOutTime($request)],
             'day' => ['required', new ValidDate],
             'user_id' => 'required|numeric',
         ];

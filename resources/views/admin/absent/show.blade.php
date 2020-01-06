@@ -2,7 +2,7 @@
 @section('content')
 <div class="cover-image">
     @include('status')
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center pt-2">
         <h3>Name of Staff: {{ $absent->user->name }}</h3>
     </div>
     <div class="container pt-3">
