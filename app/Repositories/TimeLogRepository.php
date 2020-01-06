@@ -103,4 +103,28 @@ class TimeLogRepository implements TimeLogInterface
         ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])
         ->get();
     }
+
+    public function calculateWorkingTime()
+    {
+        $timeLogs = TimeLog::whereNull('working_time')->get();
+
+        foreach ($timeLogs as $timeLog) {
+            $hourDiff = Carbon::parse($timeLog->check_out)->floatDiffInHours($timeLog->check_in);
+            
+            if ($hourDiff >= 8) {
+                $workingTime = 8;
+            } else {
+                $workingTime = $hourDiff;
+            }
+
+            $timeLog->update([
+                'working_time' => $workingTime,
+            ]);
+        }
+    }
+
+    public function getWorkingTime($timeLogs)
+    {
+        return $timeLogs->sum('working_time');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Interfaces\TimeLogInterface;
 use App\Interfaces\UserInterface;
+use App\Events\TimeLogCreated;
 
 class CheckOutController extends Controller
 {
@@ -30,6 +31,7 @@ class CheckOutController extends Controller
         if ($checkTimeLog) {
             if (empty($checkTimeLog->check_out)) {
                 $this->timeLogRepository->setCheckOut($checkTimeLog);
+                event(new TimeLogCreated);
 
                 return redirect('/')->with('status', trans('time_log.check_out_success'));
             } else {

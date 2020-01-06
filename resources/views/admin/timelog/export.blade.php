@@ -5,6 +5,8 @@
             <th scope="col">Check In</th>
             <th scope="col">Check Out</th>
             <th scope="col">Staff Name</th>
+            <th scope="col">Working Time(hour)</th>
+            <td>{{ $workingTime }}</td>
         </tr>
     </thead>
     <tbody>

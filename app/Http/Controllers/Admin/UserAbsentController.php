@@ -31,7 +31,8 @@ class UserAbsentController extends Controller
     public function export(FilterExportFormRequest $request, $userId)
     {
         $absents = $this->absentRequestRepository->getAcceptedAbsentsByUserId($request->validated(), $userId);
+        $absentTime = $this->absentRequestRepository->getAbsentTime($absents);
 
-        return Excel::download(new UserAbsentExport($absents), 'Absents.xlsx');
+        return Excel::download(new UserAbsentExport($absents, $absentTime), 'Absents.xlsx');
     }
 }

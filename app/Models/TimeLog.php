@@ -11,6 +11,7 @@ class TimeLog extends BaseModel
         'check_out',
         'day',
         'user_id',
+        'working_time'
     ];
         
     public function user()
