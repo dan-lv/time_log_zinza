@@ -39,3 +39,9 @@ $(document).ready(function () {
         format: FORMAT_DATE
     });
 });
+//Select2
+$(document).ready(function() {
+    $('#user-id').select2({
+        placeholder: "Select User",
+    });
+});

@@ -40,19 +40,16 @@ class AbsentRepository implements AbsentInterface
 
     public function getAbsentByUserId($userId)
     {
-
-        return AbsentRequest::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
+        return AbsentRequest::where('user_id', $userId)->orderBy('day', 'desc')->paginate(self::NUMBER_OF_ITEM);
     }
 
     public function getAllAbsents()
     {
-
-        return AbsentRequest::with('user')->paginate(self::NUMBER_OF_ITEM);
+        return AbsentRequest::with('user')->orderBy('day', 'desc')->paginate(self::NUMBER_OF_ITEM);
     }
 
     public function updateAbsent($request, $id)
     {
-        
         $absent = $this->getAbsentById($id);
 
         $absent->update([
@@ -65,7 +62,6 @@ class AbsentRepository implements AbsentInterface
 
     public function confirmAbsent($request, $id)
     {
-        
         $absent = $this->getAbsentById($id);
 
         $absent->update([
@@ -77,7 +73,6 @@ class AbsentRepository implements AbsentInterface
 
     public function getAbsentById($id)
     {
-
         return AbsentRequest::where('id', $id)->first();
     }
 
@@ -94,13 +89,11 @@ class AbsentRepository implements AbsentInterface
 
     public function getProcessingAbsents()
     {
-
-        return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_PROCESSING)->paginate(self::NUMBER_OF_ITEM);
+        return AbsentRequest::with('user')->where('status', AbsentRequest::STATUS_PROCESSING)->orderBy('day', 'desc')->paginate(self::NUMBER_OF_ITEM);
     }
 
     public function getAcceptedAbsentsByUserId($request, $userId)
     {
-
         return AbsentRequest::where('user_id', $userId)
         ->where('status', AbsentRequest::STATUS_ACCEPTED)
         ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])
@@ -109,7 +102,6 @@ class AbsentRepository implements AbsentInterface
 
     public function getAcceptedAbsentsByFilter($request)
     {
-
         return AbsentRequest::with('user')
         ->where('status', AbsentRequest::STATUS_ACCEPTED)
         ->whereMonth('day', $this->operators[$request['operator_month']], $request['month'])

@@ -33,7 +33,6 @@ class TimeLogRepository implements TimeLogInterface
 
     public function setCheckIn($userId)
     {
-        
         TimeLog::create([
             'check_in' => $this->getTime()->toTimeString(),
             'day' => $this->getTime()->toDateString(),
@@ -51,13 +50,12 @@ class TimeLogRepository implements TimeLogInterface
 
     public function getTimeLogsByUserId($userId)
     {
-
-        return TimeLog::where('user_id', $userId)->paginate(self::NUMBER_OF_ITEM);
+        return TimeLog::where('user_id', $userId)->orderBy('day', 'desc')->paginate(self::NUMBER_OF_ITEM);
     }
 
     public function getAll()
     {
-        return TimeLog::with('user')->paginate(self::NUMBER_OF_ITEM);
+        return TimeLog::with('user')->orderBy('day', 'desc')->paginate(self::NUMBER_OF_ITEM);
     }
 
     public function createTimeLog($request)

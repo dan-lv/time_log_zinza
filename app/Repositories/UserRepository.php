@@ -57,4 +57,9 @@ class UserRepository implements UserInterface
     {
         return User::find($userId);
     }
+
+    public function getAllActiveUsers()
+    {
+        return User::all();
+    }
 }

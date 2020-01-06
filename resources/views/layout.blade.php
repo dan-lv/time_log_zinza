@@ -11,6 +11,8 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+
         <link rel="stylesheet" type="text/css" href="{{ mix('css/style.css') }}">
     </head>
     <body>

@@ -28,11 +28,20 @@
             </div>
 
             <div class="form-group">
-                <label for="user-id">User ID</label>
+                <label for="user-id">User:</label>
                 @if (!$timeLog->exists)
-                <input id="user-id" class="form-control" type="number" name="user_id" value="{{ old('user_id', $timeLog->user_id) }}">
+                <select id="user-id" name="user_id" class="custom-select">
+                    <option></option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" @if (old('user_id', $timeLog->user_id) == $user->id) selected @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
                 @else
-                <input id="user-id" class="form-control" type="number" name="user_id" value="{{ old('user_id', $timeLog->user_id) }}" readonly="">
+                <select id="user-id" name="user_id" class="custom-select">
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" @if (old('user_id', $timeLog->user_id) == $user->id) selected @else disabled @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
                 @endif
             </div>
 

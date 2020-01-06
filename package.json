@@ -25,6 +25,7 @@
         "eonasdan-bootstrap-datetimepicker": "^4.17.47",
         "jquery": "^3.2",
         "moment": "^2.24.0",
-        "popper.js": "^1.12"
+        "popper.js": "^1.12",
+        "select2": "^4.0.12"
     }
 }

@@ -29,8 +29,13 @@
 
             @if (!$absent->exists)
             <div class="form-group">
-                <label for="user-id">User ID:</label>
-                <input id="user-id" class="form-control" type="text" name="user_id" value="{{ old('user_id') }}">
+                <label for="user-id">User:</label>
+                <select id="user-id" name="user_id" class="custom-select">
+                    <option></option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}" @if (old('user_id', $absent->user_id) == $user->id) selected @endif>{{ $user->name }}</option>
+                    @endforeach
+                </select>
             </div>
             @endif
 
