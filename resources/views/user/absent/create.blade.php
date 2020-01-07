@@ -5,8 +5,8 @@
     <div class="container pt-3">
         <form class="form-absent container" method="POST" action="{{ route('absents.store') }}">
             @csrf
-            @include('message_validation')
             <h2 class="d-flex justify-content-center"> Fill the following form </h2>
+            @include('message_validation')
             <div class="form-group">
                 <label for="time-absent-from">Absent from:</label>
                 <input type="text" name="absent_from" class="form-control timepicker" id="time-absent-from" value="{{ old('absent_from') }}">

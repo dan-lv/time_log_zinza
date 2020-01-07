@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <a href="/" class="col-3 logo">
-                <img src="images/logo3.png">
+                <img class="logo" src="{{ asset('/images/logotran.png') }}">
             </a>
             <ul class="nav col-9 justify-content-end">
                 @if (Auth::check())

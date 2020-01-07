@@ -26,19 +26,28 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    public function getUserMiss()
+    public function getMissTimeLogUser()
     {
-        $user = $this->userRepository->getAllActiveUserId();
-        $timelog_user_id = $this->timeLogRepository->getUserHasTimeLog();
-        $absent_user_id = $this->absentRequestRepository->getUserHasAbsent();
-        $user_available = array_merge($timelog_user_id, $absent_user_id);
-        $miss_user_id = array_values(array_diff($user, $user_available));
+        $activeUserId = $this->userRepository->getAllActiveUserId();
+        $timelogUserId = $this->timeLogRepository->getUserHasTimeLog();
+        $absentUserId = $this->absentRequestRepository->getUserHasAbsent();
+        $availableUser = array_merge($timelogUserId, $absentUserId);
+        $missUserId = array_values(array_diff($activeUserId, $availableUser));
 
-        return $this->userRepository->getUserById($miss_user_id);
+        return $this->userRepository->getUserById($missUserId);
     }
 
     public function getDateToday()
     {
         return Carbon::now()->toDateString();
+    }
+
+    public function getMissCheckOutUser()
+    {
+        $activeUserId = $this->userRepository->getAllActiveUserId();
+        $missCheckOutUserId = $this->timeLogRepository->getMissCheckOutUser();
+        $missActiveUserId = array_intersect($missCheckOutUserId, $activeUserId);
+
+        return $this->userRepository->getUserById($missActiveUserId);
     }
 }

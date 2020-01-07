@@ -7,7 +7,7 @@ use Mail;
 use App\Mail\MissUserMail;
 use App\Services\UserService;
 
-class UserMissTimeLogs extends Command
+class MissTimeLogsUser extends Command
 {
     /**
      * The name and signature of the console command.
@@ -43,6 +43,6 @@ class UserMissTimeLogs extends Command
      */
     public function handle()
     {
-        Mail::send(new MissUserMail($this->userService->getUserMiss(), $this->userService->getDateToday()));
+        Mail::send(new MissUserMail($this->userService->getMissTimeLogUser(), $this->userService->getMissCheckOutUser(), $this->userService->getDateToday()));
     }
 }

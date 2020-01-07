@@ -13,12 +13,14 @@ class MissUserMail extends Mailable implements ShouldQueue
 
     const NAME = 'HR';
 
-    private $users;
+    private $miss_timelog_users;
+    private $miss_check_out_users;
     private $day;
 
-    public function __construct($users, $day)
+    public function __construct($miss_timelog_users, $miss_check_out_users, $day)
     {
-        $this->users = $users;
+        $this->miss_timelog_users = $miss_timelog_users;
+        $this->miss_check_out_users = $miss_check_out_users;
         $this->day = $day;
     }
 
@@ -34,7 +36,8 @@ class MissUserMail extends Mailable implements ShouldQueue
                     ->to(env('MAIL_USERNAME'), self::NAME)
                     ->view('emails.miss_user')
                     ->with([
-                        'users' => $this->users,
+                        'miss_timelog_users' => $this->miss_timelog_users,
+                        'miss_check_out_users' => $this->miss_check_out_users,
                         'day' => $this->day,
                     ]);
     }

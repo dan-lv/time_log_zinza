@@ -10,8 +10,8 @@
         @method('PUT')
         @endif
             @csrf
-            @include('message_validation')
             <h2 class="d-flex justify-content-center"> Fill the following form </h2>
+            @include('message_validation')
             <div class="form-group">
                 <label for="check-in-time">Check In Time:</label>
                 <input type="text" name="check_in_time" class="form-control timepicker" id="check-in-time" value="{{ old('check_in_time', $timeLog->check_in) }}">

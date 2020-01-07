@@ -91,6 +91,7 @@ class ManageAbsentController extends Controller
     public function update(AbsentFormRequest $request, $id)
     {
         $this->absentRequestRepository->updateAbsent($request->validated(), $id);
+        event(new AbsentCreated);
 
         return back()->with('status', __('absent.edit_success'));
     }

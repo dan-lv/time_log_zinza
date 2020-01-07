@@ -100,6 +100,7 @@ class ManageTimeLogController extends Controller
     public function update(TimeLogFormRequest $request, $id)
     {
         $timeLog = $this->timeLogRepository->updateTimeLog($request->validated(), $id);
+        event(new TimeLogCreated);
         $request->session()->now('status', __('time_log.edit_success'));
 
         return view('admin.timelog.create_edit')->with('timeLog', $timeLog);

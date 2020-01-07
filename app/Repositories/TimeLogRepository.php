@@ -81,6 +81,7 @@ class TimeLogRepository implements TimeLogInterface
             'check_in' => $request['check_in_time'],
             'check_out' => $request['check_out_time'],
             'day' => $request['day'],
+            'working_time' => null,
         ]);
 
         return $timeLog;
@@ -118,7 +119,7 @@ class TimeLogRepository implements TimeLogInterface
         $currentTime = $this->getTime();
         $today = $currentTime->toDateString();
 
-        return TimeLog::where('day', $today)->get();
+        return TimeLog::where('day', $today);
     }
 
     public function getUserHasTimeLog(): array
@@ -126,9 +127,14 @@ class TimeLogRepository implements TimeLogInterface
         return $this->getAllTimeLogsToday()->pluck('user_id')->toArray();
     }
 
+    public function getMissCheckOutUser()
+    {
+        return $this->getAllTimeLogsToday()->whereNull('check_out')->pluck('user_id')->toArray();
+    }
+
     public function calculateWorkingTime()
     {
-        $timeLogs = TimeLog::whereNull('working_time')->get();
+        $timeLogs = TimeLog::whereNull('working_time')->whereNotNull('check_out')->get();
 
         foreach ($timeLogs as $timeLog) {
             $hourDiff = Carbon::parse($timeLog->check_out)->floatDiffInHours($timeLog->check_in);
