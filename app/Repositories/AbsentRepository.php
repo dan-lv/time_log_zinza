@@ -116,6 +116,17 @@ class AbsentRepository implements AbsentInterface
         ->whereYear('day', $this->operators[$request['operator_year']], $request['year'])->get();
     }
 
+    public function getExistAbsent($request, $userId = 0)
+    {
+        if ($userId == 0) {
+            $absent = AbsentRequest::where('day', $request['day'])->where('user_id', $request['user_id'])->first();
+        } else {
+            $absent = AbsentRequest::where('day', $request['day'])->where('user_id', $userId)->first();
+        }
+
+        return $absent;
+    }
+
     public function calculateAbsentTime()
     {
         $absents = AbsentRequest::whereNull('absent_time')->get();

@@ -7,5 +7,6 @@ return [
     'check_out_success' => 'You checked-out successful!',
     'check_out_fail' => 'You checked_out today!',
     'edit_success' => 'TimeLog edited successful',
-    'create_success' => 'New Time Log created successfully!'
+    'create_success' => 'New Time Log created successfully!',
+    'exist' => 'TimeLog existed this day'
 ];

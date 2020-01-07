@@ -3,7 +3,7 @@
 <div class="container">
     @include('status')
     @include('message_validation')
-    <div class="row trans-form">
+    <div class="row trans-form mb-4">
         <div class="col-4 avatar">
             <div class="card" style="width: 18rem;">
                 <img src="{{ asset('/images/'.$profile->image) }}" class="card-img-top" alt="Avatar">

@@ -1,8 +1,8 @@
 @extends('layout')
 @section('content')
-<div class="cover-image">
+<div class="cover-image overflow-auto">
     @include('status')
-    <div class="container pt-3">
+    <div class="container pt-3 pb-3">
         @if (!$absent->exists)
         <form class="form-absent container" method="POST" action="{{ route('manage.absents.store') }}">
         @else
@@ -10,9 +10,9 @@
         @method('PUT')
         @endif
             @csrf
-            @include('message_validation')
             <h2 class="d-flex justify-content-center"> Fill the following form </h2>
-            <div class="form-group">
+            @include('message_validation')
+            <div class="form-group pt-1">
                 <label for="time-absent-from">Absent from:</label>
                 <input type="text" name="absent_from" class="form-control timepicker" id="time-absent-from" value="{{ old('absent_from', $absent->time_absent_from) }}">
             </div>

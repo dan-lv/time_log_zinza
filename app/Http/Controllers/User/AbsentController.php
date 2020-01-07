@@ -9,6 +9,7 @@ use App\Http\Requests\AbsentFormRequest;
 use App\Exports\UserAbsentExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\FilterExportFormRequest;
+use App\Interfaces\TimeLogInterface;
 use App\Events\AbsentCreated;
 
 class AbsentController extends Controller
@@ -20,11 +21,13 @@ class AbsentController extends Controller
      */
     private $absentRequestRepository;
     private $userRepository;
+    private $timeLogRepository;
 
-    public function __construct(AbsentInterface $absentRequestRepository, UserInterface $userRepository)
+    public function __construct(AbsentInterface $absentRequestRepository, UserInterface $userRepository, TimeLogInterface $timeLogRepository)
     {
         $this->absentRequestRepository = $absentRequestRepository;
         $this->userRepository = $userRepository;
+        $this->timeLogRepository = $timeLogRepository;
     }
 
     public function create()
@@ -41,15 +44,20 @@ class AbsentController extends Controller
     public function store(AbsentFormRequest $request)
     {
         $userId = $this->userRepository->getCurrentUserId();
-        $checkAbsent = $this->absentRequestRepository->getAbsentToday($userId);
+        $existAbsent = $this->absentRequestRepository->getExistAbsent($request->validated(), $userId);
+        $existTimeLog = $this->timeLogRepository->getExistTimeLog($request->validated(), $userId);
     
-        if (!$checkAbsent) {
+        if (!$existAbsent && !$existTimeLog) {
             $this->absentRequestRepository->createAbsentRequest($request->validated(), $userId);
             event(new AbsentCreated);
             
             return redirect()->route('absents.create')->with('status', __('absent.success'));
-        } else {
+        }
+        if ($existAbsent && !$existTimeLog) {
             return redirect()->route('absents.create')->with('status', __('absent.already_sent'));
+        }
+        if (!$existAbsent && $existTimeLog) {
+            return redirect()->route('absents.create')->with('status', __('time_log.exist'));
         }
     }
 
